@@ -1,0 +1,194 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           15/Feb/2016  16:47:33
+# Copyright 1996-2015 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  C:\Users\Evan Noble\Desktop\Homework3\switch.c
+#    Command line  =  
+#        "C:\Users\Evan Noble\Desktop\Homework3\switch.c" -lC "C:\Users\Evan
+#        Noble\Desktop\Homework3\Debug\List" -o "C:\Users\Evan
+#        Noble\Desktop\Homework3\Debug\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.3\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
+#        --multiplier=32 --hw_workaround=CPU40 --code_model=large
+#    List file     =  
+#        C:\Users\Evan Noble\Desktop\Homework3\Debug\List\switch.lst
+#    Object file   =  
+#        C:\Users\Evan Noble\Desktop\Homework3\Debug\Obj\switch.r43
+#
+###############################################################################
+
+C:\Users\Evan Noble\Desktop\Homework3\switch.c
+      1          //------------------------------------------------------------------------------
+      2          //  File Name : switch.c
+      3          //
+      4          //  Description: This file contains the code to change what the swicthes do
+      5          //
+      6          //  Evan Noble
+      7          //  Jan 2016
+      8          //  Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+      9          //------------------------------------------------------------------------------
+     10          #include "macros.h"
+     11          #include "globals.h"
+     12          #include  "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x220
+   \   union <unnamed> _A_PBIN_L
+   \                     _A_PBIN_L:
+   \   000000                DS8 2
+     13          #include "functions.h"
+     14          
+     15          //------------------------------------------------------------------------------
+     16          // Function Name: Switches_Process
+     17          //
+     18          // Description: changes what is on the display depending what switch is pushed
+     19          //
+     20          // Passed: none
+     21          // Locals: none
+     22          // Returned: none
+     23          // Globals: char* display_1,display_2,display_3,display_4
+     24          //          posL1,posL2,posL3,posL4
+     25          //
+     26          // Evan Noble
+     27          // Jan 2016
+     28          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     29          //------------------------------------------------------------------------------
+
+   \                                 In  segment CODE, align 2
+     30          void Switches_Process(void){
+   \                     Switches_Process:
+     31          //------------------------------------------------------------------------------
+     32            if (!(P4IN & SW1)){
+   \   000000   D2B32102     BIT.B   #0x1, &0x221
+   \   000004   062C         JC      ??Switches_Process_0
+     33              start = 1;
+   \   000006   9243....     MOV.W   #0x1, &start
+     34              five_msec_sleep(15);
+   \   00000A   3C400F00     MOV.W   #0xf, R12
+   \   00000E   ........     CALLA   #five_msec_sleep
+     35              //display_2 = "WOLFPACK";
+     36              //posL2 = BLOCK_1;
+     37              //display_3 = "ECE306";
+     38              //posL3 = BLOCK_2;
+     39              //display_4 = "E Noble";
+     40              //posL4 = BLOCK_1;
+     41            }
+     42            if (!(P4IN & SW2)) {
+   \                     ??Switches_Process_0:
+   \   000012   E2B32102     BIT.B   #0x2, &0x221
+   \   000016   292C         JC      ??Switches_Process_1
+     43              if(cycleNumber == 0) {
+   \   000018   8293....     CMP.W   #0x0, &cycleNumber
+   \   00001C   0920         JNE     ??Switches_Process_2
+     44                display_1 = "Triangle";
+   \   00001E   B240........ MOV.W   #`?<Constant "Triangle">`, &display_1
+     45                display_2 = "    ";
+   \   000024   B240........ MOV.W   #`?<Constant "    ">`, &display_2
+     46                cycleNumber++;
+   \   00002A   9253....     ADD.W   #0x1, &cycleNumber
+   \   00002E   173C         JMP     ??Switches_Process_3
+     47              } else if (cycleNumber == 1) {
+   \                     ??Switches_Process_2:
+   \   000030   9293....     CMP.W   #0x1, &cycleNumber
+   \   000034   0920         JNE     ??Switches_Process_4
+     48                display_1 = "Figure";
+   \   000036   B240........ MOV.W   #`?<Constant "Figure">`, &display_1
+     49                display_2 = "Eight";
+   \   00003C   B240........ MOV.W   #`?<Constant "Eight">`, &display_2
+     50                cycleNumber++;
+   \   000042   9253....     ADD.W   #0x1, &cycleNumber
+   \   000046   0B3C         JMP     ??Switches_Process_3
+     51              } else if(cycleNumber == 2) {
+   \                     ??Switches_Process_4:
+   \   000048   A293....     CMP.W   #0x2, &cycleNumber
+   \   00004C   0820         JNE     ??Switches_Process_3
+     52                display_1 = "Circle";
+   \   00004E   B240........ MOV.W   #`?<Constant "Circle">`, &display_1
+     53                display_2 = "    ";
+   \   000054   B240........ MOV.W   #`?<Constant "    ">`, &display_2
+     54                cycleNumber = 0;
+   \   00005A   8243....     MOV.W   #0x0, &cycleNumber
+     55              }
+     56              posL1 = BLOCK_1;
+   \                     ??Switches_Process_3:
+   \   00005E   D243....     MOV.B   #0x1, &posL1
+     57              five_msec_sleep(15);
+   \   000062   3C400F00     MOV.W   #0xf, R12
+   \   000066   ........     CALLA   #five_msec_sleep
+     58             // display_2 = "   ";
+     59              //posL2 = BLOCK_2;
+     60              //display_3 = "  ";
+     61              //posL3 = BLOCK_3;
+     62              //display_4 = "    ";
+     63              //posL4 = BLOCK_1;
+     64            }
+     65          //------------------------------------------------------------------------------
+     66          }
+   \                     ??Switches_Process_1:
+   \   00006A   1001         RETA
+   \   00006C                REQUIRE _A_PBIN_L
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Triangle">`:
+   \   000000   547269616E67 DC8 "Triangle"
+   \            6C6500      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "    ">`:
+   \   000000   2020202000   DC8 "    "
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Figure">`:
+   \   000000   466967757265 DC8 "Figure"
+   \            00          
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Eight">`:
+   \   000000   456967687400 DC8 "Eight"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Circle">`:
+   \   000000   436972636C65 DC8 "Circle"
+   \            00          
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   Switches_Process
+        4   -> five_msec_sleep
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       5  ?<Constant "    ">
+       7  ?<Constant "Circle">
+       6  ?<Constant "Eight">
+       7  ?<Constant "Figure">
+       9  ?<Constant "Triangle">
+     108  Switches_Process
+       2  _A_PBIN_L
+
+ 
+ 108 bytes in segment CODE
+   2 bytes in segment DATA16_AN
+  34 bytes in segment DATA16_C
+ 
+ 108 bytes of CODE  memory
+  34 bytes of CONST memory
+   0 bytes of DATA  memory (+ 2 bytes shared)
+
+Errors: none
+Warnings: none

@@ -1,0 +1,147 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           15/Feb/2016  16:47:33
+# Copyright 1996-2015 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  C:\Users\Evan Noble\Desktop\Homework3\motors.c
+#    Command line  =  
+#        "C:\Users\Evan Noble\Desktop\Homework3\motors.c" -lC "C:\Users\Evan
+#        Noble\Desktop\Homework3\Debug\List" -o "C:\Users\Evan
+#        Noble\Desktop\Homework3\Debug\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.3\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
+#        --multiplier=32 --hw_workaround=CPU40 --code_model=large
+#    List file     =  
+#        C:\Users\Evan Noble\Desktop\Homework3\Debug\List\motors.lst
+#    Object file   =  
+#        C:\Users\Evan Noble\Desktop\Homework3\Debug\Obj\motors.r43
+#
+###############################################################################
+
+C:\Users\Evan Noble\Desktop\Homework3\motors.c
+      1          //------------------------------------------------------------------------------
+      2          //  File Name : motors.c
+      3          //
+      4          //  Description: This file contains the functions for motot control
+      5          //
+      6          //  Evan Noble
+      7          //  Feb 2016
+      8          //  Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+      9          //------------------------------------------------------------------------------
+     10          
+     11          #include "macros.h"
+     12          #include "globals.h"
+     13          #include "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x222
+   \   union <unnamed> _A_PBOUT_L
+   \                     _A_PBOUT_L:
+   \   000000                DS8 2
+     14          
+
+   \                                 In  segment CODE, align 2
+     15          void RightMotorForward(void) {
+   \                     RightMotorForward:
+     16            P3OUT |= R_FORWARD;
+   \   000000   F2D010002202 BIS.B   #0x10, &0x222
+     17          }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     18          
+
+   \                                 In  segment CODE, align 2
+     19          void LeftMotorForward(void) {
+   \                     LeftMotorForward:
+     20            P3OUT |= L_FORWARD;
+   \   000000   F2D040002202 BIS.B   #0x40, &0x222
+     21          }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     22          
+
+   \                                 In  segment CODE, align 2
+     23          void RightMotorOff(void) {
+   \                     RightMotorOff:
+     24            P3OUT &= ~R_FORWARD;
+   \   000000   F2C010002202 BIC.B   #0x10, &0x222
+     25          }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     26          
+
+   \                                 In  segment CODE, align 2
+     27          void LeftMotorOff(void) {
+   \                     LeftMotorOff:
+     28            P3OUT &= ~L_FORWARD;
+   \   000000   F2C040002202 BIC.B   #0x40, &0x222
+     29          }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     30          
+
+   \                                 In  segment CODE, align 2
+     31          void RightTurn(void) {
+   \                     RightTurn:
+     32            LeftMotorForward();
+   \   000000   ........     CALLA   #LeftMotorForward
+     33            RightMotorOff();
+   \   000004   ........     BRA     #RightMotorOff
+     34          }
+     35          
+
+   \                                 In  segment CODE, align 2
+     36          void LeftTurn(void) {
+   \                     LeftTurn:
+     37            RightMotorForward();
+   \   000000   ........     CALLA   #RightMotorForward
+     38            LeftMotorOff();
+   \   000004   ........     BRA     #LeftMotorOff
+     39          }
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   LeftMotorForward
+      4   LeftMotorOff
+      4   LeftTurn
+        0   -> LeftMotorOff
+        4   -> RightMotorForward
+      4   RightMotorForward
+      4   RightMotorOff
+      4   RightTurn
+        4   -> LeftMotorForward
+        0   -> RightMotorOff
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       8  LeftMotorForward
+       8  LeftMotorOff
+       8  LeftTurn
+       8  RightMotorForward
+       8  RightMotorOff
+       8  RightTurn
+       2  _A_PBOUT_L
+
+ 
+ 48 bytes in segment CODE
+  2 bytes in segment DATA16_AN
+ 
+ 48 bytes of CODE memory
+  0 bytes of DATA memory (+ 2 bytes shared)
+
+Errors: none
+Warnings: none

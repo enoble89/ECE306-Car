@@ -1,0 +1,152 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           15/Feb/2016  16:47:33
+# Copyright 1996-2015 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  C:\Users\Evan Noble\Desktop\Homework3\display.c
+#    Command line  =  
+#        "C:\Users\Evan Noble\Desktop\Homework3\display.c" -lC "C:\Users\Evan
+#        Noble\Desktop\Homework3\Debug\List" -o "C:\Users\Evan
+#        Noble\Desktop\Homework3\Debug\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.3\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
+#        --multiplier=32 --hw_workaround=CPU40 --code_model=large
+#    List file     =  
+#        C:\Users\Evan Noble\Desktop\Homework3\Debug\List\display.lst
+#    Object file   =  
+#        C:\Users\Evan Noble\Desktop\Homework3\Debug\Obj\display.r43
+#
+###############################################################################
+
+C:\Users\Evan Noble\Desktop\Homework3\display.c
+      1          //------------------------------------------------------------------------------
+      2          // File Name : display.c
+      3          //
+      4          //  Description: This file contains the controls for the lcd display
+      5          //
+      6          //  Evan Noble
+      7          //  Jan 2016
+      8          //  Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+      9          //------------------------------------------------------------------------------
+     10          #include "macros.h"
+     11          #include "globals.h"
+     12          #include "msp430.h"
+     13          #include "functions.h"
+     14          //------------------------------------------------------------------------------
+     15          // Function Name: Init_Conditions
+     16          //
+     17          // Description: Setups the lcd
+     18          //
+     19          // Passed: none
+     20          // Locals: none
+     21          // Returned: none
+     22          // Globals: char* display_1,display_2,display_3,display_4
+     23          //          char display_line_1[0],display_line_2[0],display_line_3[0],display_line_4[0]
+     24          //
+     25          // Evan Noble
+     26          // Jan 2016
+     27          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     28          //------------------------------------------------------------------------------
+
+   \                                 In  segment CODE, align 2
+     29          void Init_Conditions(void){
+   \                     Init_Conditions:
+     30          //------------------------------------------------------------------------------
+     31          // Initializations Configurations
+     32          //------------------------------------------------------------------------------
+     33          // Interrupts are disabled by default, enable them. 
+     34            enable_interrupts();
+   \   000000   ........     CALLA   #enable_interrupts
+     35            display_1 = &display_line_1[CLEAR];
+   \   000004   B240........ MOV.W   #display_line_1, &display_1
+     36            display_2 = &display_line_2[CLEAR];
+   \   00000A   B240........ MOV.W   #display_line_2, &display_2
+     37            display_3 = &display_line_3[CLEAR];
+   \   000010   B240........ MOV.W   #display_line_3, &display_3
+     38            display_4 = &display_line_4[CLEAR];
+   \   000016   B240........ MOV.W   #display_line_4, &display_4
+     39           
+     40          //------------------------------------------------------------------------------
+     41          }
+   \   00001C   1001         RETA
+     42          //------------------------------------------------------------------------------
+     43          // Function Name: Display_Process
+     44          //
+     45          // Description: clears the lcd and then writes to it
+     46          //
+     47          // Passed: none
+     48          // Locals: none
+     49          // Returned: none
+     50          // Globals: display_1, LCD_HOME_L1, posL1
+     51          //          display_2, LCD_HOME_L2, posL2
+     52          //          display_3, LCD_HOME_L3, posL3
+     53          //          display_4, LCD_HOME_L4, posL4
+     54          //
+     55          // Evan Noble
+     56          // Jan 2016
+     57          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     58          //------------------------------------------------------------------------------
+
+   \                                 In  segment CODE, align 2
+     59          void Display_Process(void){
+   \                     Display_Process:
+     60            ClrDisplay();
+   \   000000   ........     CALLA   #ClrDisplay
+     61            lcd_out(display_1, LCD_HOME_L1, posL1);
+   \   000004   5E42....     MOV.B   &posL1, R14
+   \   000008   7D408000     MOV.B   #0x80, R13
+   \   00000C   1C42....     MOV.W   &display_1, R12
+   \   000010   ........     CALLA   #lcd_out
+     62            lcd_out(display_2, LCD_HOME_L2, posL2);
+   \   000014   5E42....     MOV.B   &posL2, R14
+   \   000018   7D40A000     MOV.B   #0xa0, R13
+   \   00001C   1C42....     MOV.W   &display_2, R12
+   \   000020   ........     CALLA   #lcd_out
+     63            lcd_out(display_3, LCD_HOME_L3, posL3);
+   \   000024   5E42....     MOV.B   &posL3, R14
+   \   000028   7D40C000     MOV.B   #0xc0, R13
+   \   00002C   1C42....     MOV.W   &display_3, R12
+   \   000030   ........     CALLA   #lcd_out
+     64            lcd_out(display_4, LCD_HOME_L4, posL4);
+   \   000034   5E42....     MOV.B   &posL4, R14
+   \   000038   7D40E000     MOV.B   #0xe0, R13
+   \   00003C   1C42....     MOV.W   &display_4, R12
+   \   000040   ........     BRA     #lcd_out
+     65          }
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   Display_Process
+        4   -> ClrDisplay
+        0   -> lcd_out
+        4   -> lcd_out
+      4   Init_Conditions
+        4   -> enable_interrupts
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      68  Display_Process
+      30  Init_Conditions
+
+ 
+ 98 bytes in segment CODE
+ 
+ 98 bytes of CODE memory
+
+Errors: none
+Warnings: none

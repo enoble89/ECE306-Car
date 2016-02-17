@@ -1,0 +1,222 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           15/Feb/2016  17:51:14
+# Copyright 1996-2015 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  C:\Users\Evan Noble\Desktop\Homework3\shapes.c
+#    Command line  =  
+#        "C:\Users\Evan Noble\Desktop\Homework3\shapes.c" -lC "C:\Users\Evan
+#        Noble\Desktop\Homework3\Debug\List" -o "C:\Users\Evan
+#        Noble\Desktop\Homework3\Debug\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.3\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
+#        --multiplier=32 --hw_workaround=CPU40 --code_model=large
+#    List file     =  
+#        C:\Users\Evan Noble\Desktop\Homework3\Debug\List\shapes.lst
+#    Object file   =  
+#        C:\Users\Evan Noble\Desktop\Homework3\Debug\Obj\shapes.r43
+#
+###############################################################################
+
+C:\Users\Evan Noble\Desktop\Homework3\shapes.c
+      1          //------------------------------------------------------------------------------
+      2          //  File Name : shapes.c
+      3          //
+      4          //  Description: This file contains the functions for doing the shapes for 
+      5          //               project. 3
+      6          //
+      7          //  Evan Noble
+      8          //  Feb 2016
+      9          //  Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     10          //------------------------------------------------------------------------------
+     11          
+     12          #include "macros.h"
+     13          #include "globals.h"
+     14          #include "msp430.h"
+     15          #include "functions.h"
+     16          
+
+   \                                 In  segment CODE, align 2
+     17          void StraightLine(void) {
+   \                     StraightLine:
+     18            Time_Sequence = 0;
+   \   000000   8243....     MOV.W   #0x0, &Time_Sequence
+     19            while(Time_Sequence < 100) {
+   \                     ??StraightLine_0:
+   \   000004   B2906400.... CMP.W   #0x64, &Time_Sequence
+   \   00000A   0E2C         JC      ??StraightLine_1
+     20              RightMotorForward();
+   \   00000C   ........     CALLA   #RightMotorForward
+     21              LeftMotorForward();
+   \   000010   ........     CALLA   #LeftMotorForward
+     22              five_msec_sleep(4);
+   \   000014   2C42         MOV.W   #0x4, R12
+   \   000016   ........     CALLA   #five_msec_sleep
+     23              LeftMotorOff();
+   \   00001A   ........     CALLA   #LeftMotorOff
+     24              five_msec_sleep(7);
+   \   00001E   3C400700     MOV.W   #0x7, R12
+   \   000022   ........     CALLA   #five_msec_sleep
+   \   000026   EE3F         JMP     ??StraightLine_0
+     25            }
+     26            RightMotorOff();
+   \                     ??StraightLine_1:
+   \   000028   ........     CALLA   #RightMotorOff
+     27            LeftMotorOff();
+   \   00002C   ........     BRA     #LeftMotorOff
+     28          }
+     29          
+
+   \                                 In  segment CODE, align 2
+     30          void Circle(int circleTime) {
+   \                     Circle:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   0A4C         MOV.W   R12, R10
+     31            Time_Sequence = 0;
+   \   000004   8243....     MOV.W   #0x0, &Time_Sequence
+     32            while(Time_Sequence < circleTime) {
+   \                     ??Circle_0:
+   \   000008   829A....     CMP.W   R10, &Time_Sequence
+   \   00000C   112C         JC      ??Circle_1
+     33              RightMotorForward();
+   \   00000E   ........     CALLA   #RightMotorForward
+     34              LeftMotorForward();
+   \   000012   ........     CALLA   #LeftMotorForward
+     35              five_msec_sleep(5);
+   \   000016   3C400500     MOV.W   #0x5, R12
+   \   00001A   ........     CALLA   #five_msec_sleep
+     36              LeftMotorOff();
+   \   00001E   ........     CALLA   #LeftMotorOff
+     37              five_msec_sleep(20);
+   \   000022   3C401400     MOV.W   #0x14, R12
+   \   000026   ........     CALLA   #five_msec_sleep
+     38              RightMotorOff();
+   \   00002A   ........     CALLA   #RightMotorOff
+   \   00002E   EC3F         JMP     ??Circle_0
+     39            }
+     40          }
+   \                     ??Circle_1:
+   \   000030   3A41         POP.W   R10
+   \   000032   1001         RETA
+     41          
+
+   \                                 In  segment CODE, align 2
+     42          void TriangleTurn(int turnTime) {
+   \                     TriangleTurn:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   0A4C         MOV.W   R12, R10
+     43            RightMotorForward();
+   \   000004   ........     CALLA   #RightMotorForward
+     44            five_msec_sleep(turnTime);
+   \   000008   0C4A         MOV.W   R10, R12
+   \   00000A   ........     CALLA   #five_msec_sleep
+     45            RightMotorOff();
+   \   00000E   ........     CALLA   #RightMotorOff
+     46          }
+   \   000012   3A41         POP.W   R10
+   \   000014   1001         RETA
+     47          
+
+   \                                 In  segment CODE, align 2
+     48          void Triangle(void) {
+   \                     Triangle:
+   \   000000   0A12         PUSH.W  R10
+     49            int triangleSides;
+     50            for(triangleSides=0;triangleSides<6;triangleSides++) {
+   \   000002   0A43         MOV.W   #0x0, R10
+   \                     ??Triangle_0:
+   \   000004   3A900600     CMP.W   #0x6, R10
+   \   000008   1034         JGE     ??Triangle_1
+     51              five_msec_sleep(50);
+   \   00000A   3C403200     MOV.W   #0x32, R12
+   \   00000E   ........     CALLA   #five_msec_sleep
+     52              StraightLine();
+   \   000012   ........     CALLA   #StraightLine
+     53              five_msec_sleep(50);
+   \   000016   3C403200     MOV.W   #0x32, R12
+   \   00001A   ........     CALLA   #five_msec_sleep
+     54              TriangleTurn(53);
+   \   00001E   3C403500     MOV.W   #0x35, R12
+   \   000022   ........     CALLA   #TriangleTurn
+     55            }
+   \   000026   1A53         ADD.W   #0x1, R10
+   \   000028   ED3F         JMP     ??Triangle_0
+     56          }
+   \                     ??Triangle_1:
+   \   00002A   3A41         POP.W   R10
+   \   00002C   1001         RETA
+     57          
+
+   \                                 In  segment CODE, align 2
+     58          void FigureEight() {
+   \                     FigureEight:
+     59            Circle(185);
+   \   000000   3C40B900     MOV.W   #0xb9, R12
+   \   000004   ........     CALLA   #Circle
+     60            StraightLine();
+   \   000008   ........     CALLA   #StraightLine
+     61            Circle(185);
+   \   00000C   3C40B900     MOV.W   #0xb9, R12
+   \   000010   ........     CALLA   #Circle
+     62            StraightLine();
+   \   000014   ........     BRA     #StraightLine
+     63          }
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      6   Circle
+        6   -> LeftMotorForward
+        6   -> LeftMotorOff
+        6   -> RightMotorForward
+        6   -> RightMotorOff
+        6   -> five_msec_sleep
+      4   FigureEight
+        4   -> Circle
+        0   -> StraightLine
+        4   -> StraightLine
+      4   StraightLine
+        4   -> LeftMotorForward
+        0   -> LeftMotorOff
+        4   -> LeftMotorOff
+        4   -> RightMotorForward
+        4   -> RightMotorOff
+        4   -> five_msec_sleep
+      6   Triangle
+        6   -> StraightLine
+        6   -> TriangleTurn
+        6   -> five_msec_sleep
+      6   TriangleTurn
+        6   -> RightMotorForward
+        6   -> RightMotorOff
+        6   -> five_msec_sleep
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      52  Circle
+      24  FigureEight
+      48  StraightLine
+      46  Triangle
+      22  TriangleTurn
+
+ 
+ 192 bytes in segment CODE
+ 
+ 192 bytes of CODE memory
+
+Errors: none
+Warnings: none
