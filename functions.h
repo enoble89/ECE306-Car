@@ -74,5 +74,6 @@ void Circle(int);
 void TriangleTurn(int);
 void Triangle(void);
 void FigureEight(void);
+void LeftCircle(int);
 
 

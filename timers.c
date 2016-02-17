@@ -8,7 +8,7 @@
 //  Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
 //------------------------------------------------------------------------------
 #include "macros.h"
-#include  "globals.h"
+#include "globals.h"
 #include "functions.h"
 //------------------------------------------------------------------------------
 // Function Name: Init_Timers

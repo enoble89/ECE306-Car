@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  21:11:59
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  18:06:47
 # Copyright 1996-2015 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
 #
@@ -227,9 +227,9 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
    \   000068   0A20         JNE     ??main_2
    \   00006A   8293....     CMP.W   #0x0, &cycleNumber
    \   00006E   0720         JNE     ??main_2
-    103              Circle(35);
-   \   000070   3C402300     MOV.W   #0x23, R12
-   \   000074   ........     CALLA   #Circle
+    103              LeftCircle(68);
+   \   000070   3C404400     MOV.W   #0x44, R12
+   \   000074   ........     CALLA   #LeftCircle
     104              start = 0;
    \   000078   8243....     MOV.W   #0x0, &start
    \   00007C   E93F         JMP     ??main_0
@@ -250,12 +250,13 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
    \   000098   DB23         JNE     ??main_0
    \   00009A   A293....     CMP.W   #0x2, &cycleNumber
    \   00009E   D823         JNE     ??main_0
-    109              FigureEight();
-   \   0000A0   ........     CALLA   #FigureEight
+    109              LeftCircle(2);
+   \   0000A0   2C43         MOV.W   #0x2, R12
+   \   0000A2   ........     CALLA   #LeftCircle
     110              start = 0;
-   \   0000A4   8243....     MOV.W   #0x0, &start
-   \   0000A8   D33F         JMP     ??main_0
-   \   0000AA   0343         NOP
+   \   0000A6   8243....     MOV.W   #0x0, &start
+   \   0000AA   D23F         JMP     ??main_0
+   \   0000AC   0343         NOP
     111             }
     112             
     113           }
@@ -295,14 +296,13 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
    CSTACK Function
    ------ --------
       4   main
-        4   -> Circle
         4   -> Display_Process
-        4   -> FigureEight
         4   -> Init_Clocks
         4   -> Init_Conditions
         4   -> Init_LCD
         4   -> Init_Ports
         4   -> Init_Timers
+        4   -> LeftCircle
         4   -> Switches_Process
         4   -> Triangle
         4   -> five_msec_sleep
@@ -321,7 +321,7 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
        2  cycleNumber
        2  five_msec_count
        1  led_smclk
-     172  main
+     174  main
        1  one_time
        1  posL1
        1  posL2
@@ -331,11 +331,11 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
        2  start
 
  
- 172 bytes in segment CODE
+ 174 bytes in segment CODE
   16 bytes in segment DATA16_C
   19 bytes in segment DATA16_Z
  
- 172 bytes of CODE  memory
+ 174 bytes of CODE  memory
   16 bytes of CONST memory
   19 bytes of DATA  memory
 

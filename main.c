@@ -100,13 +100,13 @@ void main(void){
    
    //performs shape depending on selection in menu
    if(start == 1 && cycleNumber == 0) {
-    Circle(7);
+    LeftCircle(68);
     start = 0;
    } else if(start == 1 && cycleNumber == 1) {
     Triangle();
     start = 0;
    } else if(start == 1 && cycleNumber == 2) {
-    FigureEight();
+    LeftCircle(2);
     start = 0;
    }
    

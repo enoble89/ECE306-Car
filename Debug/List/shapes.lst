@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  21:05:33
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  17:52:25
 # Copyright 1996-2015 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
 #
@@ -82,173 +82,151 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
      29          
 
    \                                 In  segment CODE, align 2
-     30          void Circle(int circleTime) {
-   \                     Circle:
+     30          void RightCircle(int circleTime) {
+   \                     RightCircle:
    \   000000   1B15         PUSHM.W #0x2, R11
    \   000002   0A4C         MOV.W   R12, R10
-     31            int x;
-     32            for(x=0;x<circleTime;x++) {
+     31            int ecn;
+     32            for(ecn=0;ecn<circleTime;ecn++) {
    \   000004   0B43         MOV.W   #0x0, R11
-   \                     ??Circle_0:
+   \                     ??RightCircle_0:
    \   000006   0B9A         CMP.W   R10, R11
-   \   000008   1234         JGE     ??Circle_1
+   \   000008   1034         JGE     ??RightCircle_1
      33              RightMotorForward();
    \   00000A   ........     CALLA   #RightMotorForward
      34              LeftMotorForward();
    \   00000E   ........     CALLA   #LeftMotorForward
-     35              five_msec_sleep(5);
-   \   000012   3C400500     MOV.W   #0x5, R12
-   \   000016   ........     CALLA   #five_msec_sleep
+     35              five_msec_sleep(2);
+   \   000012   2C43         MOV.W   #0x2, R12
+   \   000014   ........     CALLA   #five_msec_sleep
      36              LeftMotorOff();
-   \   00001A   ........     CALLA   #LeftMotorOff
-     37              five_msec_sleep(15);
-   \   00001E   3C400F00     MOV.W   #0xf, R12
-   \   000022   ........     CALLA   #five_msec_sleep
+   \   000018   ........     CALLA   #LeftMotorOff
+     37              five_msec_sleep(4);
+   \   00001C   2C42         MOV.W   #0x4, R12
+   \   00001E   ........     CALLA   #five_msec_sleep
      38              RightMotorOff();
-   \   000026   ........     CALLA   #RightMotorOff
+   \   000022   ........     CALLA   #RightMotorOff
      39            }
-   \   00002A   1B53         ADD.W   #0x1, R11
-   \   00002C   EC3F         JMP     ??Circle_0
+   \   000026   1B53         ADD.W   #0x1, R11
+   \   000028   EE3F         JMP     ??RightCircle_0
      40          }
-   \                     ??Circle_1:
-   \   00002E   1A17         POPM.W  #0x2, R11
-   \   000030   1001         RETA
+   \                     ??RightCircle_1:
+   \   00002A   1A17         POPM.W  #0x2, R11
+   \   00002C   1001         RETA
      41          
 
    \                                 In  segment CODE, align 2
-     42          void TriangleTurn(int turnTime) {
+     42          void LeftCircle(int circleTime) {
+   \                     LeftCircle:
+   \   000000   1B15         PUSHM.W #0x2, R11
+   \   000002   0A4C         MOV.W   R12, R10
+     43            int lcx;
+     44            for(lcx=0;lcx<circleTime;lcx++) {
+   \   000004   0B43         MOV.W   #0x0, R11
+   \                     ??LeftCircle_0:
+   \   000006   0B9A         CMP.W   R10, R11
+   \   000008   1034         JGE     ??LeftCircle_1
+     45              RightMotorForward();
+   \   00000A   ........     CALLA   #RightMotorForward
+     46              LeftMotorForward();
+   \   00000E   ........     CALLA   #LeftMotorForward
+     47              five_msec_sleep(2);
+   \   000012   2C43         MOV.W   #0x2, R12
+   \   000014   ........     CALLA   #five_msec_sleep
+     48              RightMotorOff();
+   \   000018   ........     CALLA   #RightMotorOff
+     49              five_msec_sleep(4);
+   \   00001C   2C42         MOV.W   #0x4, R12
+   \   00001E   ........     CALLA   #five_msec_sleep
+     50              LeftMotorOff();
+   \   000022   ........     CALLA   #LeftMotorOff
+     51            }
+   \   000026   1B53         ADD.W   #0x1, R11
+   \   000028   EE3F         JMP     ??LeftCircle_0
+     52          }
+   \                     ??LeftCircle_1:
+   \   00002A   1A17         POPM.W  #0x2, R11
+   \   00002C   1001         RETA
+     53          
+
+   \                                 In  segment CODE, align 2
+     54          void TriangleTurn(int turnTime) {
    \                     TriangleTurn:
    \   000000   0A12         PUSH.W  R10
    \   000002   0A4C         MOV.W   R12, R10
-     43            RightMotorForward();
+     55            RightMotorForward();
    \   000004   ........     CALLA   #RightMotorForward
-     44            five_msec_sleep(turnTime);
+     56            five_msec_sleep(turnTime);
    \   000008   0C4A         MOV.W   R10, R12
    \   00000A   ........     CALLA   #five_msec_sleep
-     45            RightMotorOff();
+     57            RightMotorOff();
    \   00000E   ........     CALLA   #RightMotorOff
-     46          }
+     58          }
    \   000012   3A41         POP.W   R10
    \   000014   1001         RETA
-     47          
+     59          
 
    \                                 In  segment CODE, align 2
-     48          void Triangle(void) {
+     60          void Triangle(void) {
    \                     Triangle:
    \   000000   0A12         PUSH.W  R10
-     49            int triangleSides;
-     50            for(triangleSides=0;triangleSides<6;triangleSides++) {
+     61            int triangleSides;
+     62            for(triangleSides=0;triangleSides<6;triangleSides++) {
    \   000002   0A43         MOV.W   #0x0, R10
    \                     ??Triangle_0:
    \   000004   3A900600     CMP.W   #0x6, R10
-   \   000008   3934         JGE     ??Triangle_1
-     51              five_msec_sleep(50);
+   \   000008   1234         JGE     ??Triangle_1
+     63              five_msec_sleep(50);
    \   00000A   3C403200     MOV.W   #0x32, R12
    \   00000E   ........     CALLA   #five_msec_sleep
-     52              StraightLine(10);
+     64              StraightLine(10);
    \   000012   3C400A00     MOV.W   #0xa, R12
    \   000016   ........     CALLA   #StraightLine
-     53              five_msec_sleep(50);
+     65              five_msec_sleep(50);
    \   00001A   3C403200     MOV.W   #0x32, R12
    \   00001E   ........     CALLA   #five_msec_sleep
-     54              switch(triangleSides) {
-   \   000022   0F4A         MOV.W   R10, R15
-   \   000024   0F83         SUB.W   #0x0, R15
-   \   000026   0B24         JEQ     ??Triangle_2
-   \   000028   1F83         SUB.W   #0x1, R15
-   \   00002A   0E24         JEQ     ??Triangle_3
-   \   00002C   1F83         SUB.W   #0x1, R15
-   \   00002E   1124         JEQ     ??Triangle_4
-   \   000030   1F83         SUB.W   #0x1, R15
-   \   000032   1424         JEQ     ??Triangle_5
-   \   000034   1F83         SUB.W   #0x1, R15
-   \   000036   1724         JEQ     ??Triangle_6
-   \   000038   1F83         SUB.W   #0x1, R15
-   \   00003A   1A24         JEQ     ??Triangle_7
-   \   00003C   1D3C         JMP     ??Triangle_8
-     55              case 0:
-     56                  TriangleTurn(37);
-   \                     ??Triangle_2:
-   \   00003E   3C402500     MOV.W   #0x25, R12
-   \   000042   ........     CALLA   #TriangleTurn
-     57                  break;
-   \   000046   183C         JMP     ??Triangle_8
-     58              case 1:
-     59                  TriangleTurn(33);
-   \                     ??Triangle_3:
-   \   000048   3C402100     MOV.W   #0x21, R12
-   \   00004C   ........     CALLA   #TriangleTurn
-     60                  break;
-   \   000050   133C         JMP     ??Triangle_8
-     61              case 2:
-     62                  TriangleTurn(37);
-   \                     ??Triangle_4:
-   \   000052   3C402500     MOV.W   #0x25, R12
-   \   000056   ........     CALLA   #TriangleTurn
-     63                  break;
-   \   00005A   0E3C         JMP     ??Triangle_8
-     64              case 3:
-     65                  TriangleTurn(33);
-   \                     ??Triangle_5:
-   \   00005C   3C402100     MOV.W   #0x21, R12
-   \   000060   ........     CALLA   #TriangleTurn
-     66                  break;
-   \   000064   093C         JMP     ??Triangle_8
-     67              case 4:
-     68                  TriangleTurn(37);
-   \                     ??Triangle_6:
-   \   000066   3C402500     MOV.W   #0x25, R12
-   \   00006A   ........     CALLA   #TriangleTurn
-     69                  break;
-   \   00006E   043C         JMP     ??Triangle_8
-     70              case 5:
-     71                  TriangleTurn(33);
-   \                     ??Triangle_7:
-   \   000070   3C402100     MOV.W   #0x21, R12
-   \   000074   ........     CALLA   #TriangleTurn
-     72                  break;
-     73              }
-     74            }
-   \                     ??Triangle_8:
-   \   000078   1A53         ADD.W   #0x1, R10
-   \   00007A   C43F         JMP     ??Triangle_0
-     75          }
+     66              TriangleTurn(37);
+   \   000022   3C402500     MOV.W   #0x25, R12
+   \   000026   ........     CALLA   #TriangleTurn
+     67            }
+   \   00002A   1A53         ADD.W   #0x1, R10
+   \   00002C   EB3F         JMP     ??Triangle_0
+     68          }
    \                     ??Triangle_1:
-   \   00007C   3A41         POP.W   R10
-   \   00007E   1001         RETA
-     76          
+   \   00002E   3A41         POP.W   R10
+   \   000030   1001         RETA
+     69          
 
    \                                 In  segment CODE, align 2
-     77          void FigureEight() {
+     70          void FigureEight() {
    \                     FigureEight:
-     78            Circle(185);
-   \   000000   3C40B900     MOV.W   #0xb9, R12
-   \   000004   ........     CALLA   #Circle
-     79            StraightLine(20);
-   \   000008   3C401400     MOV.W   #0x14, R12
-   \   00000C   ........     CALLA   #StraightLine
-     80            Circle(185);
-   \   000010   3C40B900     MOV.W   #0xb9, R12
-   \   000014   ........     CALLA   #Circle
-     81            StraightLine(20);
-   \   000018   3C401400     MOV.W   #0x14, R12
-   \   00001C   ........     BRA     #StraightLine
-     82          }
+     71            RightCircle(1);
+   \   000000   1C43         MOV.W   #0x1, R12
+   \   000002   ........     CALLA   #RightCircle
+     72            LeftCircle(1);
+   \   000006   1C43         MOV.W   #0x1, R12
+   \   000008   ........     BRA     #LeftCircle
+     73          }
 
    Maximum stack usage in bytes:
 
    CSTACK Function
    ------ --------
-      8   Circle
+      4   FigureEight
+        0   -> LeftCircle
+        4   -> RightCircle
+      8   LeftCircle
         8   -> LeftMotorForward
         8   -> LeftMotorOff
         8   -> RightMotorForward
         8   -> RightMotorOff
         8   -> five_msec_sleep
-      4   FigureEight
-        4   -> Circle
-        0   -> StraightLine
-        4   -> StraightLine
+      8   RightCircle
+        8   -> LeftMotorForward
+        8   -> LeftMotorOff
+        8   -> RightMotorForward
+        8   -> RightMotorOff
+        8   -> five_msec_sleep
       8   StraightLine
         8   -> LeftMotorForward
         8   -> LeftMotorOff
@@ -269,16 +247,17 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
 
    Bytes  Function/Label
    -----  --------------
-      50  Circle
-      32  FigureEight
+      12  FigureEight
+      46  LeftCircle
+      46  RightCircle
       48  StraightLine
-     128  Triangle
+      50  Triangle
       22  TriangleTurn
 
  
- 280 bytes in segment CODE
+ 224 bytes in segment CODE
  
- 280 bytes of CODE memory
+ 224 bytes of CODE memory
 
 Errors: none
 Warnings: none

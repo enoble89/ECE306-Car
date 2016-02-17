@@ -1,5 +1,5 @@
 [DebugChecksum]
-Checksum=1701953160
+Checksum=-1252007775
 [Stack]
 FillEnabled=0
 OverflowWarningsEnabled=1
@@ -22,8 +22,11 @@ Counter1=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 ShowArgs=0
 [Disassembly]
 MixedMode=1
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
 [Breakpoints]
-Bp0=_ "STD_CODE" "{$PROJ_DIR$\shapes.c}.56.9" 1 0 0 0 "" 0 ""
+Bp0=_ "STD_CODE" "{$PROJ_DIR$\shapes.c}.44.3" 1 0 0 0 "" 0 ""
 Count=1
 [FET]
 Clock mode=46
@@ -49,11 +52,8 @@ File name=
 LoggingEnabled=_ 0
 LogFile=_ ""
 Category=_ 0
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""
 [Aliases]
-A0=_ "C:\Users\Evan Noble\Desktop\Homework3\ports.c" ""
+A0=_ "D:\Dropbox\NCSU\Current\Code Master\Project 02 - Code\timersA0.c" ""
 A1=_ "E:\Dropbox\NCSU\Current\Code Master\Project 02 - Code\LCD.c" ""
 Count=2
 SuppressDialog=0

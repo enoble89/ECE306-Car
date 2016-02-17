@@ -27,15 +27,27 @@ void StraightLine(int straightLineTime) {
  
 }
 
-void Circle(int circleTime) {
-  int x;
-  for(x=0;x<circleTime;x++) {
+void RightCircle(int circleTime) {
+  int ecn;
+  for(ecn=0;ecn<circleTime;ecn++) {
     RightMotorForward();
     LeftMotorForward();
     five_msec_sleep(2);
     LeftMotorOff();
     five_msec_sleep(4);
     RightMotorOff();
+  }
+}
+
+void LeftCircle(int circleTime) {
+  int lcx;
+  for(lcx=0;lcx<circleTime;lcx++) {
+    RightMotorForward();
+    LeftMotorForward();
+    five_msec_sleep(2);
+    RightMotorOff();
+    five_msec_sleep(4);
+    LeftMotorOff();
   }
 }
 
@@ -51,32 +63,11 @@ void Triangle(void) {
     five_msec_sleep(50);
     StraightLine(10);
     five_msec_sleep(50);
-    switch(triangleSides) {
-    case 0:
-        TriangleTurn(37);
-        break;
-    case 1:
-        TriangleTurn(33);
-        break;
-    case 2:
-        TriangleTurn(37);
-        break;
-    case 3:
-        TriangleTurn(33);
-        break;
-    case 4:
-        TriangleTurn(37);
-        break;
-    case 5:
-        TriangleTurn(33);
-        break;
-    }
+    TriangleTurn(37);
   }
 }
 
 void FigureEight() {
-  Circle(185);
-  StraightLine(20);
-  Circle(185);
-  StraightLine(20);
+  RightCircle(1);
+  LeftCircle(1);
 }
