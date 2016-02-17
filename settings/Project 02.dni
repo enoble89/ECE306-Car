@@ -1,5 +1,5 @@
 [DebugChecksum]
-Checksum=-1252007775
+Checksum=1069887647
 [Stack]
 FillEnabled=0
 OverflowWarningsEnabled=1
@@ -26,8 +26,7 @@ MixedMode=1
 LoggingEnabled=_ 0
 LogFile=_ ""
 [Breakpoints]
-Bp0=_ "STD_CODE" "{$PROJ_DIR$\shapes.c}.44.3" 1 0 0 0 "" 0 ""
-Count=1
+Count=0
 [FET]
 Clock mode=46
 Extended Clock mode=1039
@@ -53,7 +52,6 @@ LoggingEnabled=_ 0
 LogFile=_ ""
 Category=_ 0
 [Aliases]
-A0=_ "D:\Dropbox\NCSU\Current\Code Master\Project 02 - Code\timersA0.c" ""
-A1=_ "E:\Dropbox\NCSU\Current\Code Master\Project 02 - Code\LCD.c" ""
-Count=2
+A0=_ "E:\Dropbox\NCSU\Current\Code Master\Project 02 - Code\LCD.c" ""
+Count=1
 SuppressDialog=0

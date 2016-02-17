@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  17:52:25
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  18:30:02
 # Copyright 1996-2015 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
 #
@@ -91,7 +91,7 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
    \   000004   0B43         MOV.W   #0x0, R11
    \                     ??RightCircle_0:
    \   000006   0B9A         CMP.W   R10, R11
-   \   000008   1034         JGE     ??RightCircle_1
+   \   000008   1134         JGE     ??RightCircle_1
      33              RightMotorForward();
    \   00000A   ........     CALLA   #RightMotorForward
      34              LeftMotorForward();
@@ -101,18 +101,18 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
    \   000014   ........     CALLA   #five_msec_sleep
      36              LeftMotorOff();
    \   000018   ........     CALLA   #LeftMotorOff
-     37              five_msec_sleep(4);
-   \   00001C   2C42         MOV.W   #0x4, R12
-   \   00001E   ........     CALLA   #five_msec_sleep
+     37              five_msec_sleep(6);
+   \   00001C   3C400600     MOV.W   #0x6, R12
+   \   000020   ........     CALLA   #five_msec_sleep
      38              RightMotorOff();
-   \   000022   ........     CALLA   #RightMotorOff
+   \   000024   ........     CALLA   #RightMotorOff
      39            }
-   \   000026   1B53         ADD.W   #0x1, R11
-   \   000028   EE3F         JMP     ??RightCircle_0
+   \   000028   1B53         ADD.W   #0x1, R11
+   \   00002A   ED3F         JMP     ??RightCircle_0
      40          }
    \                     ??RightCircle_1:
-   \   00002A   1A17         POPM.W  #0x2, R11
-   \   00002C   1001         RETA
+   \   00002C   1A17         POPM.W  #0x2, R11
+   \   00002E   1001         RETA
      41          
 
    \                                 In  segment CODE, align 2
@@ -171,10 +171,10 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
    \                     Triangle:
    \   000000   0A12         PUSH.W  R10
      61            int triangleSides;
-     62            for(triangleSides=0;triangleSides<6;triangleSides++) {
+     62            for(triangleSides=0;triangleSides<5;triangleSides++) {
    \   000002   0A43         MOV.W   #0x0, R10
    \                     ??Triangle_0:
-   \   000004   3A900600     CMP.W   #0x6, R10
+   \   000004   3A900500     CMP.W   #0x5, R10
    \   000008   1234         JGE     ??Triangle_1
      63              five_msec_sleep(50);
    \   00000A   3C403200     MOV.W   #0x32, R12
@@ -249,15 +249,15 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
    -----  --------------
       12  FigureEight
       46  LeftCircle
-      46  RightCircle
+      48  RightCircle
       48  StraightLine
       50  Triangle
       22  TriangleTurn
 
  
- 224 bytes in segment CODE
+ 226 bytes in segment CODE
  
- 224 bytes of CODE memory
+ 226 bytes of CODE memory
 
 Errors: none
 Warnings: none

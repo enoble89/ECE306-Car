@@ -70,7 +70,7 @@ void LeftTurn(void);
 
 // Shapes
 void StraightLine(int);
-void Circle(int);
+void RightCircle(int);
 void TriangleTurn(int);
 void Triangle(void);
 void FigureEight(void);

@@ -34,7 +34,7 @@ void RightCircle(int circleTime) {
     LeftMotorForward();
     five_msec_sleep(2);
     LeftMotorOff();
-    five_msec_sleep(4);
+    five_msec_sleep(6);
     RightMotorOff();
   }
 }
@@ -59,7 +59,7 @@ void TriangleTurn(int turnTime) {
 
 void Triangle(void) {
   int triangleSides;
-  for(triangleSides=0;triangleSides<6;triangleSides++) {
+  for(triangleSides=0;triangleSides<5;triangleSides++) {
     five_msec_sleep(50);
     StraightLine(10);
     five_msec_sleep(50);

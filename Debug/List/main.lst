@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  18:06:47
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  18:20:57
 # Copyright 1996-2015 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
 #
@@ -224,44 +224,48 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
     102             if(start == 1 && cycleNumber == 0) {
    \                     ??main_1:
    \   000064   9293....     CMP.W   #0x1, &start
-   \   000068   0A20         JNE     ??main_2
+   \   000068   0E20         JNE     ??main_2
    \   00006A   8293....     CMP.W   #0x0, &cycleNumber
-   \   00006E   0720         JNE     ??main_2
+   \   00006E   0B20         JNE     ??main_2
     103              LeftCircle(68);
    \   000070   3C404400     MOV.W   #0x44, R12
    \   000074   ........     CALLA   #LeftCircle
-    104              start = 0;
-   \   000078   8243....     MOV.W   #0x0, &start
-   \   00007C   E93F         JMP     ??main_0
-    105             } else if(start == 1 && cycleNumber == 1) {
+    104              LeftCircle(68);
+   \   000078   3C404400     MOV.W   #0x44, R12
+   \   00007C   ........     CALLA   #LeftCircle
+    105              start = 0;
+   \   000080   8243....     MOV.W   #0x0, &start
+   \   000084   E53F         JMP     ??main_0
+    106             } else if(start == 1 && cycleNumber == 1) {
    \                     ??main_2:
-   \   00007E   9293....     CMP.W   #0x1, &start
-   \   000082   0820         JNE     ??main_3
-   \   000084   9293....     CMP.W   #0x1, &cycleNumber
-   \   000088   0520         JNE     ??main_3
-    106              Triangle();
-   \   00008A   ........     CALLA   #Triangle
-    107              start = 0;
-   \   00008E   8243....     MOV.W   #0x0, &start
-   \   000092   DE3F         JMP     ??main_0
-    108             } else if(start == 1 && cycleNumber == 2) {
+   \   000086   9293....     CMP.W   #0x1, &start
+   \   00008A   0820         JNE     ??main_3
+   \   00008C   9293....     CMP.W   #0x1, &cycleNumber
+   \   000090   0520         JNE     ??main_3
+    107              Triangle();
+   \   000092   ........     CALLA   #Triangle
+    108              start = 0;
+   \   000096   8243....     MOV.W   #0x0, &start
+   \   00009A   DA3F         JMP     ??main_0
+    109             } else if(start == 1 && cycleNumber == 2) {
    \                     ??main_3:
-   \   000094   9293....     CMP.W   #0x1, &start
-   \   000098   DB23         JNE     ??main_0
-   \   00009A   A293....     CMP.W   #0x2, &cycleNumber
-   \   00009E   D823         JNE     ??main_0
-    109              LeftCircle(2);
-   \   0000A0   2C43         MOV.W   #0x2, R12
-   \   0000A2   ........     CALLA   #LeftCircle
-    110              start = 0;
-   \   0000A6   8243....     MOV.W   #0x0, &start
-   \   0000AA   D23F         JMP     ??main_0
-   \   0000AC   0343         NOP
-    111             }
-    112             
-    113           }
-    114          //------------------------------------------------------------------------------
-    115          }
+   \   00009C   9293....     CMP.W   #0x1, &start
+   \   0000A0   D723         JNE     ??main_0
+   \   0000A2   A293....     CMP.W   #0x2, &cycleNumber
+   \   0000A6   D423         JNE     ??main_0
+    110              RightCircle(68);
+   \   0000A8   3C404400     MOV.W   #0x44, R12
+   \   0000AC   ........     CALLA   #RightCircle
+    111              
+    112              start = 0;
+   \   0000B0   8243....     MOV.W   #0x0, &start
+   \   0000B4   CD3F         JMP     ??main_0
+   \   0000B6   0343         NOP
+    113             }
+    114             
+    115           }
+    116          //------------------------------------------------------------------------------
+    117          }
 
    \                                 In  segment DATA16_C, align 1, align-sorted
    \                     `?<Constant "Circle">`:
@@ -275,8 +279,6 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
    \                                 In  segment DATA16_C, align 1, align-sorted
    \                     `?<Constant "   ">`:
    \   000000   20202000     DC8 "   "
-    116          
-    117          
     118          
     119          
     120          
@@ -290,6 +292,8 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
     128          
     129          
     130          
+    131          
+    132          
 
    Maximum stack usage in bytes:
 
@@ -303,6 +307,7 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
         4   -> Init_Ports
         4   -> Init_Timers
         4   -> LeftCircle
+        4   -> RightCircle
         4   -> Switches_Process
         4   -> Triangle
         4   -> five_msec_sleep
@@ -321,7 +326,7 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
        2  cycleNumber
        2  five_msec_count
        1  led_smclk
-     174  main
+     184  main
        1  one_time
        1  posL1
        1  posL2
@@ -331,11 +336,11 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
        2  start
 
  
- 174 bytes in segment CODE
+ 184 bytes in segment CODE
   16 bytes in segment DATA16_C
   19 bytes in segment DATA16_Z
  
- 174 bytes of CODE  memory
+ 184 bytes of CODE  memory
   16 bytes of CONST memory
   19 bytes of DATA  memory
 
