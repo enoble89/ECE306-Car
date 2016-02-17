@@ -1,4 +1,4 @@
-"C:\Users\Evan Noble\Desktop\Homework3\motors.c"
+"C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c"
 -std=c99
 -ferror-limit=100
 -I

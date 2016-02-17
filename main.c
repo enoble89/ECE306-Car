@@ -67,9 +67,9 @@ void main(void){
   Init_Ports();                             // Initialize Ports
   Init_Clocks();                            // Initialize Clock System 
   Init_Conditions();
-  Time_Sequence = CLEAR;                        // 
+  Time_Sequence = CLEAR;                    
   Init_Timers();                            // Initialize Timers
-  five_msec_sleep(SMALL);                      // 250 msec delay for the clock to settle
+  five_msec_sleep(SMALL);                   // 250 msec delay for the clock to settle
   Init_LCD();                               // Initialize LCD
   
 //             1234567890
@@ -88,11 +88,19 @@ void main(void){
 // Begining of the "While" Operating System
 //------------------------------------------------------------------------------
  while(ALWAYS) {                            // Can the Operating system run
- 
+   
+   //check for change in switch
    Switches_Process();
    
-   if(start == 1 && cycleNumber == 0){
-    StraightLine();
+   //update the display after a period of time
+   if(Time_Sequence > 100) {
+     Display_Process();
+     Time_Sequence = 0;
+   }
+   
+   //performs shape depending on selection in menu
+   if(start == 1 && cycleNumber == 0) {
+    Circle(7);
     start = 0;
    } else if(start == 1 && cycleNumber == 1) {
     Triangle();
@@ -101,6 +109,7 @@ void main(void){
     FigureEight();
     start = 0;
    }
+   
  }
 //------------------------------------------------------------------------------
 }

@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           15/Feb/2016  18:03:25
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  21:11:59
 # Copyright 1996-2015 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
 #
@@ -12,21 +12,22 @@
 #    __core        =  430X
 #    __data_model  =  small
 #    __code_model  =  large
-#    Source file   =  C:\Users\Evan Noble\Desktop\Homework3\main.c
+#    Source file   =  C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
 #    Command line  =  
-#        "C:\Users\Evan Noble\Desktop\Homework3\main.c" -lC "C:\Users\Evan
-#        Noble\Desktop\Homework3\Debug\List" -o "C:\Users\Evan
-#        Noble\Desktop\Homework3\Debug\Obj" --no_cse --no_unroll --no_inline
+#        "C:\Users\Evan Noble\Desktop\ECE306 Car\main.c" -lC "C:\Users\Evan
+#        Noble\Desktop\ECE306 Car\Debug\List" -o "C:\Users\Evan
+#        Noble\Desktop\ECE306 Car\Debug\Obj" --no_cse --no_unroll --no_inline
 #        --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32
 #        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
 #        7.3\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
 #        --multiplier=32 --hw_workaround=CPU40 --code_model=large
-#    List file     =  C:\Users\Evan Noble\Desktop\Homework3\Debug\List\main.lst
-#    Object file   =  C:\Users\Evan Noble\Desktop\Homework3\Debug\Obj\main.r43
+#    List file     =  
+#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\List\main.lst
+#    Object file   =  C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\Obj\main.r43
 #
 ###############################################################################
 
-C:\Users\Evan Noble\Desktop\Homework3\main.c
+C:\Users\Evan Noble\Desktop\ECE306 Car\main.c
       1          //------------------------------------------------------------------------------
       2          //  File Name : main.c
       3          //
@@ -167,11 +168,11 @@ C:\Users\Evan Noble\Desktop\Homework3\main.c
    \   000004   ........     CALLA   #Init_Clocks
      69            Init_Conditions();
    \   000008   ........     CALLA   #Init_Conditions
-     70            Time_Sequence = CLEAR;                        // 
+     70            Time_Sequence = CLEAR;                    
    \   00000C   8243....     MOV.W   #0x0, &Time_Sequence
      71            Init_Timers();                            // Initialize Timers
    \   000010   ........     CALLA   #Init_Timers
-     72            five_msec_sleep(SMALL);                      // 250 msec delay for the clock to settle
+     72            five_msec_sleep(SMALL);                   // 250 msec delay for the clock to settle
    \   000014   3C403200     MOV.W   #0x32, R12
    \   000018   ........     CALLA   #five_msec_sleep
      73            Init_LCD();                               // Initialize LCD
@@ -203,48 +204,63 @@ C:\Users\Evan Noble\Desktop\Homework3\main.c
      88          // Begining of the "While" Operating System
      89          //------------------------------------------------------------------------------
      90           while(ALWAYS) {                            // Can the Operating system run
-     91           
-     92             Switches_Process();
+     91             
+     92             //check for change in switch
+     93             Switches_Process();
    \                     ??main_0:
    \   000050   ........     CALLA   #Switches_Process
-     93             
-     94             if(start == 1 && cycleNumber == 0){
-   \   000054   9293....     CMP.W   #0x1, &start
-   \   000058   0820         JNE     ??main_1
-   \   00005A   8293....     CMP.W   #0x0, &cycleNumber
-   \   00005E   0520         JNE     ??main_1
-     95              StraightLine();
-   \   000060   ........     CALLA   #StraightLine
-     96              start = 0;
-   \   000064   8243....     MOV.W   #0x0, &start
-   \   000068   F33F         JMP     ??main_0
-     97             } else if(start == 1 && cycleNumber == 1) {
+     94             
+     95             //update the display after a period of time
+     96             if(Time_Sequence > 100) {
+   \   000054   B2906500.... CMP.W   #0x65, &Time_Sequence
+   \   00005A   0428         JNC     ??main_1
+     97               Display_Process();
+   \   00005C   ........     CALLA   #Display_Process
+     98               Time_Sequence = 0;
+   \   000060   8243....     MOV.W   #0x0, &Time_Sequence
+     99             }
+    100             
+    101             //performs shape depending on selection in menu
+    102             if(start == 1 && cycleNumber == 0) {
    \                     ??main_1:
-   \   00006A   9293....     CMP.W   #0x1, &start
-   \   00006E   0820         JNE     ??main_2
-   \   000070   9293....     CMP.W   #0x1, &cycleNumber
-   \   000074   0520         JNE     ??main_2
-     98              Triangle();
-   \   000076   ........     CALLA   #Triangle
-     99              start = 0;
-   \   00007A   8243....     MOV.W   #0x0, &start
-   \   00007E   E83F         JMP     ??main_0
-    100             } else if(start == 1 && cycleNumber == 2) {
+   \   000064   9293....     CMP.W   #0x1, &start
+   \   000068   0A20         JNE     ??main_2
+   \   00006A   8293....     CMP.W   #0x0, &cycleNumber
+   \   00006E   0720         JNE     ??main_2
+    103              Circle(35);
+   \   000070   3C402300     MOV.W   #0x23, R12
+   \   000074   ........     CALLA   #Circle
+    104              start = 0;
+   \   000078   8243....     MOV.W   #0x0, &start
+   \   00007C   E93F         JMP     ??main_0
+    105             } else if(start == 1 && cycleNumber == 1) {
    \                     ??main_2:
-   \   000080   9293....     CMP.W   #0x1, &start
-   \   000084   E523         JNE     ??main_0
-   \   000086   A293....     CMP.W   #0x2, &cycleNumber
-   \   00008A   E223         JNE     ??main_0
-    101              FigureEight();
-   \   00008C   ........     CALLA   #FigureEight
-    102              start = 0;
-   \   000090   8243....     MOV.W   #0x0, &start
-   \   000094   DD3F         JMP     ??main_0
-   \   000096   0343         NOP
-    103             }
-    104           }
-    105          //------------------------------------------------------------------------------
-    106          }
+   \   00007E   9293....     CMP.W   #0x1, &start
+   \   000082   0820         JNE     ??main_3
+   \   000084   9293....     CMP.W   #0x1, &cycleNumber
+   \   000088   0520         JNE     ??main_3
+    106              Triangle();
+   \   00008A   ........     CALLA   #Triangle
+    107              start = 0;
+   \   00008E   8243....     MOV.W   #0x0, &start
+   \   000092   DE3F         JMP     ??main_0
+    108             } else if(start == 1 && cycleNumber == 2) {
+   \                     ??main_3:
+   \   000094   9293....     CMP.W   #0x1, &start
+   \   000098   DB23         JNE     ??main_0
+   \   00009A   A293....     CMP.W   #0x2, &cycleNumber
+   \   00009E   D823         JNE     ??main_0
+    109              FigureEight();
+   \   0000A0   ........     CALLA   #FigureEight
+    110              start = 0;
+   \   0000A4   8243....     MOV.W   #0x0, &start
+   \   0000A8   D33F         JMP     ??main_0
+   \   0000AA   0343         NOP
+    111             }
+    112             
+    113           }
+    114          //------------------------------------------------------------------------------
+    115          }
 
    \                                 In  segment DATA16_C, align 1, align-sorted
    \                     `?<Constant "Circle">`:
@@ -258,27 +274,28 @@ C:\Users\Evan Noble\Desktop\Homework3\main.c
    \                                 In  segment DATA16_C, align 1, align-sorted
    \                     `?<Constant "   ">`:
    \   000000   20202000     DC8 "   "
-    107          
-    108          
-    109          
-    110          
-    111          
-    112          
-    113          
-    114          
-    115          
     116          
     117          
     118          
     119          
     120          
     121          
+    122          
+    123          
+    124          
+    125          
+    126          
+    127          
+    128          
+    129          
+    130          
 
    Maximum stack usage in bytes:
 
    CSTACK Function
    ------ --------
       4   main
+        4   -> Circle
         4   -> Display_Process
         4   -> FigureEight
         4   -> Init_Clocks
@@ -286,7 +303,6 @@ C:\Users\Evan Noble\Desktop\Homework3\main.c
         4   -> Init_LCD
         4   -> Init_Ports
         4   -> Init_Timers
-        4   -> StraightLine
         4   -> Switches_Process
         4   -> Triangle
         4   -> five_msec_sleep
@@ -305,7 +321,7 @@ C:\Users\Evan Noble\Desktop\Homework3\main.c
        2  cycleNumber
        2  five_msec_count
        1  led_smclk
-     152  main
+     172  main
        1  one_time
        1  posL1
        1  posL2
@@ -315,11 +331,11 @@ C:\Users\Evan Noble\Desktop\Homework3\main.c
        2  start
 
  
- 152 bytes in segment CODE
+ 172 bytes in segment CODE
   16 bytes in segment DATA16_C
   19 bytes in segment DATA16_Z
  
- 152 bytes of CODE  memory
+ 172 bytes of CODE  memory
   16 bytes of CONST memory
   19 bytes of DATA  memory
 

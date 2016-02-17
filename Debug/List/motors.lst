@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           15/Feb/2016  16:47:33
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           16/Feb/2016  22:45:12
 # Copyright 1996-2015 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
 #
@@ -12,23 +12,23 @@
 #    __core        =  430X
 #    __data_model  =  small
 #    __code_model  =  large
-#    Source file   =  C:\Users\Evan Noble\Desktop\Homework3\motors.c
+#    Source file   =  C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c
 #    Command line  =  
-#        "C:\Users\Evan Noble\Desktop\Homework3\motors.c" -lC "C:\Users\Evan
-#        Noble\Desktop\Homework3\Debug\List" -o "C:\Users\Evan
-#        Noble\Desktop\Homework3\Debug\Obj" --no_cse --no_unroll --no_inline
+#        "C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c" -lC "C:\Users\Evan
+#        Noble\Desktop\ECE306 Car\Debug\List" -o "C:\Users\Evan
+#        Noble\Desktop\ECE306 Car\Debug\Obj" --no_cse --no_unroll --no_inline
 #        --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32
 #        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
 #        7.3\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
 #        --multiplier=32 --hw_workaround=CPU40 --code_model=large
 #    List file     =  
-#        C:\Users\Evan Noble\Desktop\Homework3\Debug\List\motors.lst
+#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\List\motors.lst
 #    Object file   =  
-#        C:\Users\Evan Noble\Desktop\Homework3\Debug\Obj\motors.r43
+#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\Obj\motors.r43
 #
 ###############################################################################
 
-C:\Users\Evan Noble\Desktop\Homework3\motors.c
+C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c
       1          //------------------------------------------------------------------------------
       2          //  File Name : motors.c
       3          //
@@ -48,65 +48,100 @@ C:\Users\Evan Noble\Desktop\Homework3\motors.c
    \                     _A_PBOUT_L:
    \   000000                DS8 2
      14          
+     15          
+     16          //------------------------------------------------------------------------------
+     17          // Function Name: RightMotorForward
+     18          //
+     19          // Description: turns motor on in the forward direction
+     20          //
+     21          // Passed: none
+     22          // Locals: none
+     23          // Returned: none
+     24          // Globals: none
+     25          //
+     26          // Evan Noble
+     27          // Jan 2016
+     28          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     29          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     15          void RightMotorForward(void) {
+     30          void RightMotorForward(void) {
    \                     RightMotorForward:
-     16            P3OUT |= R_FORWARD;
+     31            P3OUT |= R_FORWARD;
    \   000000   F2D010002202 BIS.B   #0x10, &0x222
-     17          }
+     32          }
    \   000006   1001         RETA
    \   000008                REQUIRE _A_PBOUT_L
-     18          
+     33          //------------------------------------------------------------------------------
+     34          // Function Name: RightMotorForward
+     35          //
+     36          // Description: turns motor on in the forward direction
+     37          //
+     38          // Passed: none
+     39          // Locals: none
+     40          // Returned: none
+     41          // Globals: none
+     42          //
+     43          // Evan Noble
+     44          // Jan 2016
+     45          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     46          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     19          void LeftMotorForward(void) {
+     47          void LeftMotorForward(void) {
    \                     LeftMotorForward:
-     20            P3OUT |= L_FORWARD;
+     48            P3OUT |= L_FORWARD;
    \   000000   F2D040002202 BIS.B   #0x40, &0x222
-     21          }
+     49          }
    \   000006   1001         RETA
    \   000008                REQUIRE _A_PBOUT_L
-     22          
+     50          //------------------------------------------------------------------------------
+     51          // Function Name: RightMotorForward
+     52          //
+     53          // Description: turns motor on in the forward direction
+     54          //
+     55          // Passed: none
+     56          // Locals: none
+     57          // Returned: none
+     58          // Globals: none
+     59          //
+     60          // Evan Noble
+     61          // Jan 2016
+     62          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     63          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     23          void RightMotorOff(void) {
+     64          void RightMotorOff(void) {
    \                     RightMotorOff:
-     24            P3OUT &= ~R_FORWARD;
+     65            P3OUT &= ~R_FORWARD;
    \   000000   F2C010002202 BIC.B   #0x10, &0x222
-     25          }
+     66          }
    \   000006   1001         RETA
    \   000008                REQUIRE _A_PBOUT_L
-     26          
+     67          //------------------------------------------------------------------------------
+     68          // Function Name: RightMotorForward
+     69          //
+     70          // Description: turns motor on in the forward direction
+     71          //
+     72          // Passed: none
+     73          // Locals: none
+     74          // Returned: none
+     75          // Globals: none
+     76          //
+     77          // Evan Noble
+     78          // Jan 2016
+     79          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     80          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     27          void LeftMotorOff(void) {
+     81          void LeftMotorOff(void) {
    \                     LeftMotorOff:
-     28            P3OUT &= ~L_FORWARD;
+     82            P3OUT &= ~L_FORWARD;
    \   000000   F2C040002202 BIC.B   #0x40, &0x222
-     29          }
+     83          }
    \   000006   1001         RETA
    \   000008                REQUIRE _A_PBOUT_L
-     30          
-
-   \                                 In  segment CODE, align 2
-     31          void RightTurn(void) {
-   \                     RightTurn:
-     32            LeftMotorForward();
-   \   000000   ........     CALLA   #LeftMotorForward
-     33            RightMotorOff();
-   \   000004   ........     BRA     #RightMotorOff
-     34          }
-     35          
-
-   \                                 In  segment CODE, align 2
-     36          void LeftTurn(void) {
-   \                     LeftTurn:
-     37            RightMotorForward();
-   \   000000   ........     CALLA   #RightMotorForward
-     38            LeftMotorOff();
-   \   000004   ........     BRA     #LeftMotorOff
-     39          }
+     84          
 
    Maximum stack usage in bytes:
 
@@ -114,14 +149,8 @@ C:\Users\Evan Noble\Desktop\Homework3\motors.c
    ------ --------
       4   LeftMotorForward
       4   LeftMotorOff
-      4   LeftTurn
-        0   -> LeftMotorOff
-        4   -> RightMotorForward
       4   RightMotorForward
       4   RightMotorOff
-      4   RightTurn
-        4   -> LeftMotorForward
-        0   -> RightMotorOff
 
 
    Segment part sizes:
@@ -130,17 +159,15 @@ C:\Users\Evan Noble\Desktop\Homework3\motors.c
    -----  --------------
        8  LeftMotorForward
        8  LeftMotorOff
-       8  LeftTurn
        8  RightMotorForward
        8  RightMotorOff
-       8  RightTurn
        2  _A_PBOUT_L
 
  
- 48 bytes in segment CODE
+ 32 bytes in segment CODE
   2 bytes in segment DATA16_AN
  
- 48 bytes of CODE memory
+ 32 bytes of CODE memory
   0 bytes of DATA memory (+ 2 bytes shared)
 
 Errors: none

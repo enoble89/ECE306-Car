@@ -14,27 +14,27 @@
 #include "msp430.h"
 #include "functions.h"
 
-void StraightLine(void) {
-  Time_Sequence = 0;
-  while(Time_Sequence < 100) {
-    RightMotorForward();
-    LeftMotorForward();
-    five_msec_sleep(4);
-    LeftMotorOff();
-    five_msec_sleep(7);
-  }
-  RightMotorOff();
-  LeftMotorOff();
-}
-
-void Circle(int circleTime) {
-  Time_Sequence = 0;
-  while(Time_Sequence < circleTime) {
+void StraightLine(int straightLineTime) {
+  int x;
+  for(x=0;x<straightLineTime;x++) {
     RightMotorForward();
     LeftMotorForward();
     five_msec_sleep(5);
     LeftMotorOff();
-    five_msec_sleep(20);
+    five_msec_sleep(4);
+    RightMotorOff();
+  }
+ 
+}
+
+void Circle(int circleTime) {
+  int x;
+  for(x=0;x<circleTime;x++) {
+    RightMotorForward();
+    LeftMotorForward();
+    five_msec_sleep(2);
+    LeftMotorOff();
+    five_msec_sleep(4);
     RightMotorOff();
   }
 }
@@ -49,15 +49,34 @@ void Triangle(void) {
   int triangleSides;
   for(triangleSides=0;triangleSides<6;triangleSides++) {
     five_msec_sleep(50);
-    StraightLine();
+    StraightLine(10);
     five_msec_sleep(50);
-    TriangleTurn(53);
+    switch(triangleSides) {
+    case 0:
+        TriangleTurn(37);
+        break;
+    case 1:
+        TriangleTurn(33);
+        break;
+    case 2:
+        TriangleTurn(37);
+        break;
+    case 3:
+        TriangleTurn(33);
+        break;
+    case 4:
+        TriangleTurn(37);
+        break;
+    case 5:
+        TriangleTurn(33);
+        break;
+    }
   }
 }
 
 void FigureEight() {
   Circle(185);
-  StraightLine();
+  StraightLine(20);
   Circle(185);
-  StraightLine();
+  StraightLine(20);
 }
