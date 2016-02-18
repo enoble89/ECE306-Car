@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  18:20:57
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           18/Feb/2016  10:45:38
 # Copyright 1996-2015 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
 #
@@ -12,23 +12,24 @@
 #    __core        =  430X
 #    __data_model  =  small
 #    __code_model  =  large
-#    Source file   =  C:\Users\Evan Noble\Desktop\ECE306 Car\clocks.c
+#    Source file   =  C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\clocks.c
 #    Command line  =  
-#        "C:\Users\Evan Noble\Desktop\ECE306 Car\clocks.c" -lC "C:\Users\Evan
-#        Noble\Desktop\ECE306 Car\Debug\List" -o "C:\Users\Evan
-#        Noble\Desktop\ECE306 Car\Debug\Obj" --no_cse --no_unroll --no_inline
-#        --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32
-#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
-#        7.3\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
-#        --multiplier=32 --hw_workaround=CPU40 --code_model=large
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\clocks.c" -lC
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\List" -o
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\Obj" --no_cse
+#        --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430FR5739__ -e --double=32 --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench 7.3_2\430\lib\dlib\dl430xlsfn.h"
+#        --core=430X --data_model=small -On --multiplier=32
+#        --hw_workaround=CPU40 --code_model=large
 #    List file     =  
-#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\List\clocks.lst
+#        C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\List\clocks.lst
 #    Object file   =  
-#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\Obj\clocks.r43
+#        C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\Obj\clocks.r43
 #
 ###############################################################################
 
-C:\Users\Evan Noble\Desktop\ECE306 Car\clocks.c
+C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\clocks.c
       1          //------------------------------------------------------------------------------
       2          //  File Name : clocks.c
       3          //

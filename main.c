@@ -93,23 +93,21 @@ void main(void){
    Switches_Process();
    
    //update the display after a period of time
-   if(Time_Sequence > 100) {
+   if(Time_Sequence > LCD_REFRESH_RATE) {
      Display_Process();
-     Time_Sequence = 0;
+     Time_Sequence = CLEAR;
    }
    
    //performs shape depending on selection in menu
-   if(start == 1 && cycleNumber == 0) {
-    LeftCircle(68);
-    LeftCircle(68);
-    start = 0;
-   } else if(start == 1 && cycleNumber == 1) {
+   if(start == TRUE && cycleNumber == CIRCLE_ON_DISPLAY) {
+    RightCircle(TWO_CIRCLE_TIME);
+    start = FALSE;
+   } else if(start == TRUE && cycleNumber == TRIANGLE_ON_DISPLAY) {
     Triangle();
-    start = 0;
-   } else if(start == 1 && cycleNumber == 2) {
-    RightCircle(68);
-    
-    start = 0;
+    start = FALSE;
+   } else if(start == TRUE && cycleNumber == FIRGURE_EIGHT_ON_DISPLAY) {
+    FigureEight();
+    start = FALSE;
    }
    
  }

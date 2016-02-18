@@ -12,7 +12,7 @@
 
 "-p" 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\430\config\debugger\msp430fr5739.ddf" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3_2\430\config\debugger\msp430fr5739.ddf" 
 
 "--core=430Xv2" 
 
@@ -46,7 +46,7 @@
 
 "--port" 
 
-"HID0015:COM4" 
+"Automatic" 
 
 "--connection" 
 

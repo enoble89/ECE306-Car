@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //  File Name : motors.c
 //
-//  Description: This file contains the functions for motot control
+//  Description: This file contains the functions for motor control
 //
 //  Evan Noble
 //  Feb 2016
@@ -16,7 +16,7 @@
 //------------------------------------------------------------------------------
 // Function Name: RightMotorForward
 //
-// Description: turns motor on in the forward direction
+// Description: turns right motor on in the forward direction
 //
 // Passed: none
 // Locals: none
@@ -31,9 +31,9 @@ void RightMotorForward(void) {
   P3OUT |= R_FORWARD;
 }
 //------------------------------------------------------------------------------
-// Function Name: RightMotorForward
+// Function Name: LeftMotorForward
 //
-// Description: turns motor on in the forward direction
+// Description: turns left motor on in the forward direction
 //
 // Passed: none
 // Locals: none
@@ -48,9 +48,9 @@ void LeftMotorForward(void) {
   P3OUT |= L_FORWARD;
 }
 //------------------------------------------------------------------------------
-// Function Name: RightMotorForward
+// Function Name: RightMotorOff
 //
-// Description: turns motor on in the forward direction
+// Description: turns right motor off
 //
 // Passed: none
 // Locals: none
@@ -65,9 +65,9 @@ void RightMotorOff(void) {
   P3OUT &= ~R_FORWARD;
 }
 //------------------------------------------------------------------------------
-// Function Name: RightMotorForward
+// Function Name: LeftMotorOff
 //
-// Description: turns motor on in the forward direction
+// Description: turns left motor off
 //
 // Passed: none
 // Locals: none

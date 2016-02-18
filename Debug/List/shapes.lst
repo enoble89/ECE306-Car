@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  18:30:02
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           18/Feb/2016  11:51:12
 # Copyright 1996-2015 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
 #
@@ -12,23 +12,24 @@
 #    __core        =  430X
 #    __data_model  =  small
 #    __code_model  =  large
-#    Source file   =  C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
+#    Source file   =  C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\shapes.c
 #    Command line  =  
-#        "C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c" -lC "C:\Users\Evan
-#        Noble\Desktop\ECE306 Car\Debug\List" -o "C:\Users\Evan
-#        Noble\Desktop\ECE306 Car\Debug\Obj" --no_cse --no_unroll --no_inline
-#        --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32
-#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
-#        7.3\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
-#        --multiplier=32 --hw_workaround=CPU40 --code_model=large
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\shapes.c" -lC
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\List" -o
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\Obj" --no_cse
+#        --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430FR5739__ -e --double=32 --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench 7.3_2\430\lib\dlib\dl430xlsfn.h"
+#        --core=430X --data_model=small -On --multiplier=32
+#        --hw_workaround=CPU40 --code_model=large
 #    List file     =  
-#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\List\shapes.lst
+#        C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\List\shapes.lst
 #    Object file   =  
-#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\Obj\shapes.r43
+#        C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\Obj\shapes.r43
 #
 ###############################################################################
 
-C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
+C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\shapes.c
       1          //------------------------------------------------------------------------------
       2          //  File Name : shapes.c
       3          //
@@ -45,168 +46,247 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
      14          #include "msp430.h"
      15          #include "functions.h"
      16          
+     17          //------------------------------------------------------------------------------
+     18          // Function Name: StraightLine
+     19          //
+     20          // Description: Corrects for motor error, goes forward for a certain time 
+     21          //
+     22          // Passed: straightLineTime
+     23          // Locals: x
+     24          // Returned: none
+     25          // Globals: none
+     26          //
+     27          // Evan Noble
+     28          // Jan 2016
+     29          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     30          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     17          void StraightLine(int straightLineTime) {
+     31          void StraightLine(int straightLineTime) {
    \                     StraightLine:
    \   000000   1B15         PUSHM.W #0x2, R11
    \   000002   0A4C         MOV.W   R12, R10
-     18            int x;
-     19            for(x=0;x<straightLineTime;x++) {
+     32            int x;
+     33            for(x=CLEAR;x<straightLineTime;x++) {
    \   000004   0B43         MOV.W   #0x0, R11
    \                     ??StraightLine_0:
    \   000006   0B9A         CMP.W   R10, R11
    \   000008   1134         JGE     ??StraightLine_1
-     20              RightMotorForward();
+     34              RightMotorForward();
    \   00000A   ........     CALLA   #RightMotorForward
-     21              LeftMotorForward();
+     35              LeftMotorForward();
    \   00000E   ........     CALLA   #LeftMotorForward
-     22              five_msec_sleep(5);
+     36              five_msec_sleep(BOTH_MOTOR_ON_TIME_STRAIGHT);
    \   000012   3C400500     MOV.W   #0x5, R12
    \   000016   ........     CALLA   #five_msec_sleep
-     23              LeftMotorOff();
+     37              LeftMotorOff();
    \   00001A   ........     CALLA   #LeftMotorOff
-     24              five_msec_sleep(4);
-   \   00001E   2C42         MOV.W   #0x4, R12
+     38              five_msec_sleep(RIGHT_MOTOR_ON_TIME_STRAIGHT);
+   \   00001E   2C43         MOV.W   #0x2, R12
    \   000020   ........     CALLA   #five_msec_sleep
-     25              RightMotorOff();
+     39              RightMotorOff();
    \   000024   ........     CALLA   #RightMotorOff
-     26            }
+     40            }
    \   000028   1B53         ADD.W   #0x1, R11
    \   00002A   ED3F         JMP     ??StraightLine_0
-     27           
-     28          }
+     41           
+     42          }
    \                     ??StraightLine_1:
    \   00002C   1A17         POPM.W  #0x2, R11
    \   00002E   1001         RETA
-     29          
+     43          //------------------------------------------------------------------------------
+     44          // Function Name: LeftCircle
+     45          //
+     46          // Description: turns motors on and off to perform a circle going in the left dir
+     47          //
+     48          // Passed: circleTime
+     49          // Locals: x
+     50          // Returned: none
+     51          // Globals: none
+     52          //
+     53          // Evan Noble
+     54          // Jan 2016
+     55          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     56          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     30          void RightCircle(int circleTime) {
-   \                     RightCircle:
-   \   000000   1B15         PUSHM.W #0x2, R11
-   \   000002   0A4C         MOV.W   R12, R10
-     31            int ecn;
-     32            for(ecn=0;ecn<circleTime;ecn++) {
-   \   000004   0B43         MOV.W   #0x0, R11
-   \                     ??RightCircle_0:
-   \   000006   0B9A         CMP.W   R10, R11
-   \   000008   1134         JGE     ??RightCircle_1
-     33              RightMotorForward();
-   \   00000A   ........     CALLA   #RightMotorForward
-     34              LeftMotorForward();
-   \   00000E   ........     CALLA   #LeftMotorForward
-     35              five_msec_sleep(2);
-   \   000012   2C43         MOV.W   #0x2, R12
-   \   000014   ........     CALLA   #five_msec_sleep
-     36              LeftMotorOff();
-   \   000018   ........     CALLA   #LeftMotorOff
-     37              five_msec_sleep(6);
-   \   00001C   3C400600     MOV.W   #0x6, R12
-   \   000020   ........     CALLA   #five_msec_sleep
-     38              RightMotorOff();
-   \   000024   ........     CALLA   #RightMotorOff
-     39            }
-   \   000028   1B53         ADD.W   #0x1, R11
-   \   00002A   ED3F         JMP     ??RightCircle_0
-     40          }
-   \                     ??RightCircle_1:
-   \   00002C   1A17         POPM.W  #0x2, R11
-   \   00002E   1001         RETA
-     41          
-
-   \                                 In  segment CODE, align 2
-     42          void LeftCircle(int circleTime) {
+     57          void LeftCircle(int circleTime) {
    \                     LeftCircle:
    \   000000   1B15         PUSHM.W #0x2, R11
    \   000002   0A4C         MOV.W   R12, R10
-     43            int lcx;
-     44            for(lcx=0;lcx<circleTime;lcx++) {
+     58            int x;
+     59            for(x=CLEAR;x<circleTime;x++) {
    \   000004   0B43         MOV.W   #0x0, R11
    \                     ??LeftCircle_0:
    \   000006   0B9A         CMP.W   R10, R11
-   \   000008   1034         JGE     ??LeftCircle_1
-     45              RightMotorForward();
+   \   000008   1134         JGE     ??LeftCircle_1
+     60              RightMotorForward();
    \   00000A   ........     CALLA   #RightMotorForward
-     46              LeftMotorForward();
+     61              LeftMotorForward();
    \   00000E   ........     CALLA   #LeftMotorForward
-     47              five_msec_sleep(2);
+     62              five_msec_sleep(BOTH_MOTOR_ON_TIME_LEFT_CIRCLE);
    \   000012   2C43         MOV.W   #0x2, R12
    \   000014   ........     CALLA   #five_msec_sleep
-     48              RightMotorOff();
-   \   000018   ........     CALLA   #RightMotorOff
-     49              five_msec_sleep(4);
-   \   00001C   2C42         MOV.W   #0x4, R12
-   \   00001E   ........     CALLA   #five_msec_sleep
-     50              LeftMotorOff();
-   \   000022   ........     CALLA   #LeftMotorOff
-     51            }
-   \   000026   1B53         ADD.W   #0x1, R11
-   \   000028   EE3F         JMP     ??LeftCircle_0
-     52          }
+     63              LeftMotorOff();
+   \   000018   ........     CALLA   #LeftMotorOff
+     64              five_msec_sleep(RIGHT_MOTOR_ON_TIME_LEFT_CIRCLE);
+   \   00001C   3C400900     MOV.W   #0x9, R12
+   \   000020   ........     CALLA   #five_msec_sleep
+     65              RightMotorOff();
+   \   000024   ........     CALLA   #RightMotorOff
+     66            }
+   \   000028   1B53         ADD.W   #0x1, R11
+   \   00002A   ED3F         JMP     ??LeftCircle_0
+     67          }
    \                     ??LeftCircle_1:
-   \   00002A   1A17         POPM.W  #0x2, R11
-   \   00002C   1001         RETA
-     53          
+   \   00002C   1A17         POPM.W  #0x2, R11
+   \   00002E   1001         RETA
+     68          //------------------------------------------------------------------------------
+     69          // Function Name: RightCircle
+     70          //
+     71          // Description: performs a circle in the right direction
+     72          //
+     73          // Passed: circleTime
+     74          // Locals: x
+     75          // Returned: none
+     76          // Globals: none
+     77          //
+     78          // Evan Noble
+     79          // Jan 2016
+     80          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     81          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     54          void TriangleTurn(int turnTime) {
+     82          void RightCircle(int circleTime) {
+   \                     RightCircle:
+   \   000000   1B15         PUSHM.W #0x2, R11
+   \   000002   0A4C         MOV.W   R12, R10
+     83            int x;
+     84            for(x=CLEAR;x<circleTime;x++) {
+   \   000004   0B43         MOV.W   #0x0, R11
+   \                     ??RightCircle_0:
+   \   000006   0B9A         CMP.W   R10, R11
+   \   000008   1234         JGE     ??RightCircle_1
+     85              RightMotorForward();
+   \   00000A   ........     CALLA   #RightMotorForward
+     86              LeftMotorForward();
+   \   00000E   ........     CALLA   #LeftMotorForward
+     87              five_msec_sleep(BOTH_MOTOR_ON_TIME_RIGHT_CIRCLE);
+   \   000012   3C400300     MOV.W   #0x3, R12
+   \   000016   ........     CALLA   #five_msec_sleep
+     88              RightMotorOff();
+   \   00001A   ........     CALLA   #RightMotorOff
+     89              five_msec_sleep(LEFT_MOTOR_ON_TIME_RIGHT_CIRCLE);
+   \   00001E   3C400900     MOV.W   #0x9, R12
+   \   000022   ........     CALLA   #five_msec_sleep
+     90              LeftMotorOff();
+   \   000026   ........     CALLA   #LeftMotorOff
+     91            }
+   \   00002A   1B53         ADD.W   #0x1, R11
+   \   00002C   EC3F         JMP     ??RightCircle_0
+     92          }
+   \                     ??RightCircle_1:
+   \   00002E   1A17         POPM.W  #0x2, R11
+   \   000030   1001         RETA
+     93          //------------------------------------------------------------------------------
+     94          // Function Name: TriangleTurn
+     95          //
+     96          // Description: turns for a given ammount of time, intended for a 120 degree turn
+     97          //
+     98          // Passed: turnTime
+     99          // Locals: none
+    100          // Returned: none
+    101          // Globals: none
+    102          //
+    103          // Evan Noble
+    104          // Jan 2016
+    105          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+    106          //------------------------------------------------------------------------------
+
+   \                                 In  segment CODE, align 2
+    107          void TriangleTurn(int turnTime) {
    \                     TriangleTurn:
    \   000000   0A12         PUSH.W  R10
    \   000002   0A4C         MOV.W   R12, R10
-     55            RightMotorForward();
+    108            RightMotorForward();
    \   000004   ........     CALLA   #RightMotorForward
-     56            five_msec_sleep(turnTime);
+    109            five_msec_sleep(turnTime);
    \   000008   0C4A         MOV.W   R10, R12
    \   00000A   ........     CALLA   #five_msec_sleep
-     57            RightMotorOff();
+    110            RightMotorOff();
    \   00000E   ........     CALLA   #RightMotorOff
-     58          }
+    111          }
    \   000012   3A41         POP.W   R10
    \   000014   1001         RETA
-     59          
+    112          //------------------------------------------------------------------------------
+    113          // Function Name: Triangle
+    114          //
+    115          // Description: completes two triangles
+    116          //
+    117          // Passed: none
+    118          // Locals: triangleSides
+    119          // Returned: none
+    120          // Globals: none
+    121          //
+    122          // Evan Noble
+    123          // Jan 2016
+    124          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+    125          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     60          void Triangle(void) {
+    126          void Triangle(void) {
    \                     Triangle:
    \   000000   0A12         PUSH.W  R10
-     61            int triangleSides;
-     62            for(triangleSides=0;triangleSides<5;triangleSides++) {
+    127            int triangleSides;
+    128            for(triangleSides=CLEAR;triangleSides<TRIANGLE_SIDES_TO_COMPLETE;triangleSides++) {
    \   000002   0A43         MOV.W   #0x0, R10
    \                     ??Triangle_0:
-   \   000004   3A900500     CMP.W   #0x5, R10
-   \   000008   1234         JGE     ??Triangle_1
-     63              five_msec_sleep(50);
-   \   00000A   3C403200     MOV.W   #0x32, R12
-   \   00000E   ........     CALLA   #five_msec_sleep
-     64              StraightLine(10);
-   \   000012   3C400A00     MOV.W   #0xa, R12
-   \   000016   ........     CALLA   #StraightLine
-     65              five_msec_sleep(50);
-   \   00001A   3C403200     MOV.W   #0x32, R12
-   \   00001E   ........     CALLA   #five_msec_sleep
-     66              TriangleTurn(37);
-   \   000022   3C402500     MOV.W   #0x25, R12
-   \   000026   ........     CALLA   #TriangleTurn
-     67            }
-   \   00002A   1A53         ADD.W   #0x1, R10
-   \   00002C   EB3F         JMP     ??Triangle_0
-     68          }
+   \   000004   3A900600     CMP.W   #0x6, R10
+   \   000008   0A34         JGE     ??Triangle_1
+    129              StraightLine(TRIANGLE_SIDE_TIME);
+   \   00000A   3C400A00     MOV.W   #0xa, R12
+   \   00000E   ........     CALLA   #StraightLine
+    130              TriangleTurn(TRIANGLE_TURN_TIME);
+   \   000012   3C402500     MOV.W   #0x25, R12
+   \   000016   ........     CALLA   #TriangleTurn
+    131            }
+   \   00001A   1A53         ADD.W   #0x1, R10
+   \   00001C   F33F         JMP     ??Triangle_0
+    132          }
    \                     ??Triangle_1:
-   \   00002E   3A41         POP.W   R10
-   \   000030   1001         RETA
-     69          
+   \   00001E   3A41         POP.W   R10
+   \   000020   1001         RETA
+    133          //------------------------------------------------------------------------------
+    134          // Function Name: FigureEight
+    135          //
+    136          // Description: performs 2 figure eights
+    137          //
+    138          // Passed: none
+    139          // Locals: none
+    140          // Returned: none
+    141          // Globals: none
+    142          //
+    143          // Evan Noble
+    144          // Jan 2016
+    145          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+    146          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     70          void FigureEight() {
+    147          void FigureEight() {
    \                     FigureEight:
-     71            RightCircle(1);
-   \   000000   1C43         MOV.W   #0x1, R12
-   \   000002   ........     CALLA   #RightCircle
-     72            LeftCircle(1);
-   \   000006   1C43         MOV.W   #0x1, R12
-   \   000008   ........     BRA     #LeftCircle
-     73          }
+    148            RightCircle(RIGHT_CIRCLE_ONE_TIME);
+   \   000000   3C401100     MOV.W   #0x11, R12
+   \   000004   ........     CALLA   #RightCircle
+    149            LeftCircle(LEFT_CIRCLE_ONE_TIME);
+   \   000008   3C401000     MOV.W   #0x10, R12
+   \   00000C   ........     CALLA   #LeftCircle
+    150            RightCircle(RIGHT_CIRCLE_ONE_TIME);
+   \   000010   3C401100     MOV.W   #0x11, R12
+   \   000014   ........     CALLA   #RightCircle
+    151            LeftCircle(LEFT_CIRCLE_ONE_TIME);
+   \   000018   3C401000     MOV.W   #0x10, R12
+   \   00001C   ........     BRA     #LeftCircle
+    152          }
 
    Maximum stack usage in bytes:
 
@@ -214,6 +294,7 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
    ------ --------
       4   FigureEight
         0   -> LeftCircle
+        4   -> LeftCircle
         4   -> RightCircle
       8   LeftCircle
         8   -> LeftMotorForward
@@ -236,7 +317,6 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
       6   Triangle
         6   -> StraightLine
         6   -> TriangleTurn
-        6   -> five_msec_sleep
       6   TriangleTurn
         6   -> RightMotorForward
         6   -> RightMotorOff
@@ -247,17 +327,17 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\shapes.c
 
    Bytes  Function/Label
    -----  --------------
-      12  FigureEight
-      46  LeftCircle
-      48  RightCircle
+      32  FigureEight
+      48  LeftCircle
+      50  RightCircle
       48  StraightLine
-      50  Triangle
+      34  Triangle
       22  TriangleTurn
 
  
- 226 bytes in segment CODE
+ 234 bytes in segment CODE
  
- 226 bytes of CODE memory
+ 234 bytes of CODE memory
 
 Errors: none
 Warnings: none

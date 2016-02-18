@@ -14,60 +14,139 @@
 #include "msp430.h"
 #include "functions.h"
 
+//------------------------------------------------------------------------------
+// Function Name: StraightLine
+//
+// Description: Corrects for motor error, goes forward for a certain time 
+//
+// Passed: straightLineTime
+// Locals: x
+// Returned: none
+// Globals: none
+//
+// Evan Noble
+// Jan 2016
+// Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+//------------------------------------------------------------------------------
 void StraightLine(int straightLineTime) {
   int x;
-  for(x=0;x<straightLineTime;x++) {
+  for(x=CLEAR;x<straightLineTime;x++) {
     RightMotorForward();
     LeftMotorForward();
-    five_msec_sleep(5);
+    five_msec_sleep(BOTH_MOTOR_ON_TIME_STRAIGHT);
     LeftMotorOff();
-    five_msec_sleep(4);
+    five_msec_sleep(RIGHT_MOTOR_ON_TIME_STRAIGHT);
     RightMotorOff();
   }
  
 }
-
-void RightCircle(int circleTime) {
-  int ecn;
-  for(ecn=0;ecn<circleTime;ecn++) {
-    RightMotorForward();
-    LeftMotorForward();
-    five_msec_sleep(2);
-    LeftMotorOff();
-    five_msec_sleep(6);
-    RightMotorOff();
-  }
-}
-
+//------------------------------------------------------------------------------
+// Function Name: LeftCircle
+//
+// Description: turns motors on and off to perform a circle going in the left dir
+//
+// Passed: circleTime
+// Locals: x
+// Returned: none
+// Globals: none
+//
+// Evan Noble
+// Jan 2016
+// Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+//------------------------------------------------------------------------------
 void LeftCircle(int circleTime) {
-  int lcx;
-  for(lcx=0;lcx<circleTime;lcx++) {
+  int x;
+  for(x=CLEAR;x<circleTime;x++) {
     RightMotorForward();
     LeftMotorForward();
-    five_msec_sleep(2);
+    five_msec_sleep(BOTH_MOTOR_ON_TIME_LEFT_CIRCLE);
+    LeftMotorOff();
+    five_msec_sleep(RIGHT_MOTOR_ON_TIME_LEFT_CIRCLE);
     RightMotorOff();
-    five_msec_sleep(4);
+  }
+}
+//------------------------------------------------------------------------------
+// Function Name: RightCircle
+//
+// Description: performs a circle in the right direction
+//
+// Passed: circleTime
+// Locals: x
+// Returned: none
+// Globals: none
+//
+// Evan Noble
+// Jan 2016
+// Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+//------------------------------------------------------------------------------
+void RightCircle(int circleTime) {
+  int x;
+  for(x=CLEAR;x<circleTime;x++) {
+    RightMotorForward();
+    LeftMotorForward();
+    five_msec_sleep(BOTH_MOTOR_ON_TIME_RIGHT_CIRCLE);
+    RightMotorOff();
+    five_msec_sleep(LEFT_MOTOR_ON_TIME_RIGHT_CIRCLE);
     LeftMotorOff();
   }
 }
-
+//------------------------------------------------------------------------------
+// Function Name: TriangleTurn
+//
+// Description: turns for a given ammount of time, intended for a 120 degree turn
+//
+// Passed: turnTime
+// Locals: none
+// Returned: none
+// Globals: none
+//
+// Evan Noble
+// Jan 2016
+// Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+//------------------------------------------------------------------------------
 void TriangleTurn(int turnTime) {
   RightMotorForward();
   five_msec_sleep(turnTime);
   RightMotorOff();
 }
-
+//------------------------------------------------------------------------------
+// Function Name: Triangle
+//
+// Description: completes two triangles
+//
+// Passed: none
+// Locals: triangleSides
+// Returned: none
+// Globals: none
+//
+// Evan Noble
+// Jan 2016
+// Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+//------------------------------------------------------------------------------
 void Triangle(void) {
   int triangleSides;
-  for(triangleSides=0;triangleSides<5;triangleSides++) {
-    five_msec_sleep(50);
-    StraightLine(10);
-    five_msec_sleep(50);
-    TriangleTurn(37);
+  for(triangleSides=CLEAR;triangleSides<TRIANGLE_SIDES_TO_COMPLETE;triangleSides++) {
+    StraightLine(TRIANGLE_SIDE_TIME);
+    TriangleTurn(TRIANGLE_TURN_TIME);
   }
 }
-
+//------------------------------------------------------------------------------
+// Function Name: FigureEight
+//
+// Description: performs 2 figure eights
+//
+// Passed: none
+// Locals: none
+// Returned: none
+// Globals: none
+//
+// Evan Noble
+// Jan 2016
+// Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+//------------------------------------------------------------------------------
 void FigureEight() {
-  RightCircle(1);
-  LeftCircle(1);
+  RightCircle(RIGHT_CIRCLE_ONE_TIME);
+  LeftCircle(LEFT_CIRCLE_ONE_TIME);
+  RightCircle(RIGHT_CIRCLE_ONE_TIME);
+  LeftCircle(LEFT_CIRCLE_ONE_TIME);
 }

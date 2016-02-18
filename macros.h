@@ -7,6 +7,36 @@
 //  Jan 2016
 //  Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
 //------------------------------------------------------------------------------
+
+//universal
+#define CLEAR                	 	  (0x00)
+#define TRUE			 	  (1)
+#define FALSE			 	  (0)
+#define CIRCLE_ON_DISPLAY	 	  (0)
+#define TRIANGLE_ON_DISPLAY  	 	  (1)
+#define FIRGURE_EIGHT_ON_DISPLAY 	  (2)
+
+//main
+#define LCD_REFRESH_RATE	 	  (100)
+#define TWO_CIRCLE_TIME		 	  (36)
+
+
+//shapes
+#define TRIANGLE_SIDE_TIME	 	  (10)
+#define TRIANGLE_TURN_TIME	 	  (37)
+#define BOTH_MOTOR_ON_TIME_STRAIGHT       (5)
+#define RIGHT_MOTOR_ON_TIME_STRAIGHT      (2)
+#define BOTH_MOTOR_ON_TIME_LEFT_CIRCLE    (2)
+#define RIGHT_MOTOR_ON_TIME_LEFT_CIRCLE   (9)
+#define BOTH_MOTOR_ON_TIME_RIGHT_CIRCLE   (3)
+#define LEFT_MOTOR_ON_TIME_RIGHT_CIRCLE   (9)
+#define TRIANGLE_SIDES_TO_COMPLETE        (6)
+#define RIGHT_CIRCLE_ONE_TIME             (17)
+#define LEFT_CIRCLE_ONE_TIME		  (16)
+
+//switch
+#define SWITCH_CLICK_WAIT_TIME		  (15)	
+
 #define WAIT_TIME               (5)
 #define SMALL                   (50) 
 #define MEDIUM_SMALL            (100)  
@@ -21,7 +51,7 @@
 #define BLOCK_3              (0x03)
 #define BLOCK_4              (0x04)
 #define MAX_CHAR             (0x0B)
-#define CLEAR                (0x00)
+
 #define CLEAR_PIN            (0x00)
 #define ALWAYS                  (1)
 #define CNTL_STATE_INDEX        (3) // Control States

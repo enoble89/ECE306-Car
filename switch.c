@@ -16,6 +16,8 @@
 // Function Name: Switches_Process
 //
 // Description: changes what is on the display depending what switch is pushed
+//              and also changes what shape will be produced if the other button
+//              is pushed
 //
 // Passed: none
 // Locals: none
@@ -30,8 +32,8 @@
 void Switches_Process(void){
 //------------------------------------------------------------------------------
   if (!(P4IN & SW1)){
-    start = 1;
-    five_msec_sleep(15);
+    start = TRUE;
+    five_msec_sleep(SWITCH_CLICK_WAIT_TIME);
     //display_2 = "WOLFPACK";
     //posL2 = BLOCK_1;
     //display_3 = "ECE306";
@@ -40,21 +42,21 @@ void Switches_Process(void){
     //posL4 = BLOCK_1;
   }
   if (!(P4IN & SW2)) {
-    if(cycleNumber == 0) {
+    if(cycleNumber == CIRCLE_ON_DISPLAY) {
       display_1 = "Triangle";
       display_2 = "    ";
       cycleNumber++;
-    } else if (cycleNumber == 1) {
+    } else if (cycleNumber == TRIANGLE_ON_DISPLAY) {
       display_1 = "Figure";
       display_2 = "Eight";
       cycleNumber++;
-    } else if(cycleNumber == 2) {
+    } else if(cycleNumber == FIRGURE_EIGHT_ON_DISPLAY) {
       display_1 = "Circle";
       display_2 = "    ";
-      cycleNumber = 0;
+      cycleNumber = CIRCLE_ON_DISPLAY;
     }
     posL1 = BLOCK_1;
-    five_msec_sleep(15);
+    five_msec_sleep(SWITCH_CLICK_WAIT_TIME);
    // display_2 = "   ";
     //posL2 = BLOCK_2;
     //display_3 = "  ";

@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  18:20:57
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           18/Feb/2016  11:51:10
 # Copyright 1996-2015 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
 #
@@ -12,27 +12,28 @@
 #    __core        =  430X
 #    __data_model  =  small
 #    __code_model  =  large
-#    Source file   =  C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c
+#    Source file   =  C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\motors.c
 #    Command line  =  
-#        "C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c" -lC "C:\Users\Evan
-#        Noble\Desktop\ECE306 Car\Debug\List" -o "C:\Users\Evan
-#        Noble\Desktop\ECE306 Car\Debug\Obj" --no_cse --no_unroll --no_inline
-#        --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32
-#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
-#        7.3\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
-#        --multiplier=32 --hw_workaround=CPU40 --code_model=large
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\motors.c" -lC
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\List" -o
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\Obj" --no_cse
+#        --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430FR5739__ -e --double=32 --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench 7.3_2\430\lib\dlib\dl430xlsfn.h"
+#        --core=430X --data_model=small -On --multiplier=32
+#        --hw_workaround=CPU40 --code_model=large
 #    List file     =  
-#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\List\motors.lst
+#        C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\List\motors.lst
 #    Object file   =  
-#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\Obj\motors.r43
+#        C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\Obj\motors.r43
 #
 ###############################################################################
 
-C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c
+C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\motors.c
       1          //------------------------------------------------------------------------------
       2          //  File Name : motors.c
       3          //
-      4          //  Description: This file contains the functions for motot control
+      4          //  Description: This file contains the functions for motor control
       5          //
       6          //  Evan Noble
       7          //  Feb 2016
@@ -52,7 +53,7 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c
      16          //------------------------------------------------------------------------------
      17          // Function Name: RightMotorForward
      18          //
-     19          // Description: turns motor on in the forward direction
+     19          // Description: turns right motor on in the forward direction
      20          //
      21          // Passed: none
      22          // Locals: none
@@ -73,9 +74,9 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c
    \   000006   1001         RETA
    \   000008                REQUIRE _A_PBOUT_L
      33          //------------------------------------------------------------------------------
-     34          // Function Name: RightMotorForward
+     34          // Function Name: LeftMotorForward
      35          //
-     36          // Description: turns motor on in the forward direction
+     36          // Description: turns left motor on in the forward direction
      37          //
      38          // Passed: none
      39          // Locals: none
@@ -96,9 +97,9 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c
    \   000006   1001         RETA
    \   000008                REQUIRE _A_PBOUT_L
      50          //------------------------------------------------------------------------------
-     51          // Function Name: RightMotorForward
+     51          // Function Name: RightMotorOff
      52          //
-     53          // Description: turns motor on in the forward direction
+     53          // Description: turns right motor off
      54          //
      55          // Passed: none
      56          // Locals: none
@@ -119,9 +120,9 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\motors.c
    \   000006   1001         RETA
    \   000008                REQUIRE _A_PBOUT_L
      67          //------------------------------------------------------------------------------
-     68          // Function Name: RightMotorForward
+     68          // Function Name: LeftMotorOff
      69          //
-     70          // Description: turns motor on in the forward direction
+     70          // Description: turns left motor off
      71          //
      72          // Passed: none
      73          // Locals: none

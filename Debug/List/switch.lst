@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           17/Feb/2016  18:20:57
+# IAR C/C++ Compiler V6.40.1.950/W32 for MSP430           18/Feb/2016  11:51:13
 # Copyright 1996-2015 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.40
 #
@@ -12,23 +12,24 @@
 #    __core        =  430X
 #    __data_model  =  small
 #    __code_model  =  large
-#    Source file   =  C:\Users\Evan Noble\Desktop\ECE306 Car\switch.c
+#    Source file   =  C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\switch.c
 #    Command line  =  
-#        "C:\Users\Evan Noble\Desktop\ECE306 Car\switch.c" -lC "C:\Users\Evan
-#        Noble\Desktop\ECE306 Car\Debug\List" -o "C:\Users\Evan
-#        Noble\Desktop\ECE306 Car\Debug\Obj" --no_cse --no_unroll --no_inline
-#        --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32
-#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
-#        7.3\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
-#        --multiplier=32 --hw_workaround=CPU40 --code_model=large
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\switch.c" -lC
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\List" -o
+#        "C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\Obj" --no_cse
+#        --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430FR5739__ -e --double=32 --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench 7.3_2\430\lib\dlib\dl430xlsfn.h"
+#        --core=430X --data_model=small -On --multiplier=32
+#        --hw_workaround=CPU40 --code_model=large
 #    List file     =  
-#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\List\switch.lst
+#        C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\List\switch.lst
 #    Object file   =  
-#        C:\Users\Evan Noble\Desktop\ECE306 Car\Debug\Obj\switch.r43
+#        C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\Debug\Obj\switch.r43
 #
 ###############################################################################
 
-C:\Users\Evan Noble\Desktop\ECE306 Car\switch.c
+C:\Users\Evan Noble\Documents\GitHub\ECE306-Car\switch.c
       1          //------------------------------------------------------------------------------
       2          //  File Name : switch.c
       3          //
@@ -52,88 +53,90 @@ C:\Users\Evan Noble\Desktop\ECE306 Car\switch.c
      16          // Function Name: Switches_Process
      17          //
      18          // Description: changes what is on the display depending what switch is pushed
-     19          //
-     20          // Passed: none
-     21          // Locals: none
-     22          // Returned: none
-     23          // Globals: char* display_1,display_2,display_3,display_4
-     24          //          posL1,posL2,posL3,posL4
-     25          //
-     26          // Evan Noble
-     27          // Jan 2016
-     28          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
-     29          //------------------------------------------------------------------------------
+     19          //              and also changes what shape will be produced if the other button
+     20          //              is pushed
+     21          //
+     22          // Passed: none
+     23          // Locals: none
+     24          // Returned: none
+     25          // Globals: char* display_1,display_2,display_3,display_4
+     26          //          posL1,posL2,posL3,posL4
+     27          //
+     28          // Evan Noble
+     29          // Jan 2016
+     30          // Built with IAR Embedded Workbench Version: V7.3.1.3987 (6.40.1)
+     31          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     30          void Switches_Process(void){
+     32          void Switches_Process(void){
    \                     Switches_Process:
-     31          //------------------------------------------------------------------------------
-     32            if (!(P4IN & SW1)){
+     33          //------------------------------------------------------------------------------
+     34            if (!(P4IN & SW1)){
    \   000000   D2B32102     BIT.B   #0x1, &0x221
    \   000004   062C         JC      ??Switches_Process_0
-     33              start = 1;
+     35              start = TRUE;
    \   000006   9243....     MOV.W   #0x1, &start
-     34              five_msec_sleep(15);
+     36              five_msec_sleep(SWITCH_CLICK_WAIT_TIME);
    \   00000A   3C400F00     MOV.W   #0xf, R12
    \   00000E   ........     CALLA   #five_msec_sleep
-     35              //display_2 = "WOLFPACK";
-     36              //posL2 = BLOCK_1;
-     37              //display_3 = "ECE306";
-     38              //posL3 = BLOCK_2;
-     39              //display_4 = "E Noble";
-     40              //posL4 = BLOCK_1;
-     41            }
-     42            if (!(P4IN & SW2)) {
+     37              //display_2 = "WOLFPACK";
+     38              //posL2 = BLOCK_1;
+     39              //display_3 = "ECE306";
+     40              //posL3 = BLOCK_2;
+     41              //display_4 = "E Noble";
+     42              //posL4 = BLOCK_1;
+     43            }
+     44            if (!(P4IN & SW2)) {
    \                     ??Switches_Process_0:
    \   000012   E2B32102     BIT.B   #0x2, &0x221
    \   000016   292C         JC      ??Switches_Process_1
-     43              if(cycleNumber == 0) {
+     45              if(cycleNumber == CIRCLE_ON_DISPLAY) {
    \   000018   8293....     CMP.W   #0x0, &cycleNumber
    \   00001C   0920         JNE     ??Switches_Process_2
-     44                display_1 = "Triangle";
+     46                display_1 = "Triangle";
    \   00001E   B240........ MOV.W   #`?<Constant "Triangle">`, &display_1
-     45                display_2 = "    ";
+     47                display_2 = "    ";
    \   000024   B240........ MOV.W   #`?<Constant "    ">`, &display_2
-     46                cycleNumber++;
+     48                cycleNumber++;
    \   00002A   9253....     ADD.W   #0x1, &cycleNumber
    \   00002E   173C         JMP     ??Switches_Process_3
-     47              } else if (cycleNumber == 1) {
+     49              } else if (cycleNumber == TRIANGLE_ON_DISPLAY) {
    \                     ??Switches_Process_2:
    \   000030   9293....     CMP.W   #0x1, &cycleNumber
    \   000034   0920         JNE     ??Switches_Process_4
-     48                display_1 = "Figure";
+     50                display_1 = "Figure";
    \   000036   B240........ MOV.W   #`?<Constant "Figure">`, &display_1
-     49                display_2 = "Eight";
+     51                display_2 = "Eight";
    \   00003C   B240........ MOV.W   #`?<Constant "Eight">`, &display_2
-     50                cycleNumber++;
+     52                cycleNumber++;
    \   000042   9253....     ADD.W   #0x1, &cycleNumber
    \   000046   0B3C         JMP     ??Switches_Process_3
-     51              } else if(cycleNumber == 2) {
+     53              } else if(cycleNumber == FIRGURE_EIGHT_ON_DISPLAY) {
    \                     ??Switches_Process_4:
    \   000048   A293....     CMP.W   #0x2, &cycleNumber
    \   00004C   0820         JNE     ??Switches_Process_3
-     52                display_1 = "Circle";
+     54                display_1 = "Circle";
    \   00004E   B240........ MOV.W   #`?<Constant "Circle">`, &display_1
-     53                display_2 = "    ";
+     55                display_2 = "    ";
    \   000054   B240........ MOV.W   #`?<Constant "    ">`, &display_2
-     54                cycleNumber = 0;
+     56                cycleNumber = CIRCLE_ON_DISPLAY;
    \   00005A   8243....     MOV.W   #0x0, &cycleNumber
-     55              }
-     56              posL1 = BLOCK_1;
+     57              }
+     58              posL1 = BLOCK_1;
    \                     ??Switches_Process_3:
    \   00005E   D243....     MOV.B   #0x1, &posL1
-     57              five_msec_sleep(15);
+     59              five_msec_sleep(SWITCH_CLICK_WAIT_TIME);
    \   000062   3C400F00     MOV.W   #0xf, R12
    \   000066   ........     CALLA   #five_msec_sleep
-     58             // display_2 = "   ";
-     59              //posL2 = BLOCK_2;
-     60              //display_3 = "  ";
-     61              //posL3 = BLOCK_3;
-     62              //display_4 = "    ";
-     63              //posL4 = BLOCK_1;
-     64            }
-     65          //------------------------------------------------------------------------------
-     66          }
+     60             // display_2 = "   ";
+     61              //posL2 = BLOCK_2;
+     62              //display_3 = "  ";
+     63              //posL3 = BLOCK_3;
+     64              //display_4 = "    ";
+     65              //posL4 = BLOCK_1;
+     66            }
+     67          //------------------------------------------------------------------------------
+     68          }
    \                     ??Switches_Process_1:
    \   00006A   1001         RETA
    \   00006C                REQUIRE _A_PBIN_L
